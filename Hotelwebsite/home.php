@@ -30,6 +30,9 @@
      <div id="hotelCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
+                    <img src="images/GD-Hotel_lobby.webp" class="d-block w-100" alt="GD-Hotel">
+                </div>
+                <div class="carousel-item">
                     <img src="images/GD-Hotel-Lobby.webp" class="d-block w-100" alt="Hotel Lobby">
                 </div>
                 <div class="carousel-item">
@@ -55,9 +58,6 @@
                 </div>
                 <div class="carousel-item">
                     <img src="images/GD-Hotel-Bar.webp" class="d-block w-100" alt="Hotel Bar">
-                </div>
-                <div class="carousel-item">
-                    <img src="images/GD-Hotel_lobby.webp" class="d-block w-100" alt="GD-Hotel">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
