@@ -11,6 +11,14 @@
 <?php include('header.php'); ?>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Unsere Newsletter</h1>
+        <?php 
+            if (isset($_GET['success']) && $_GET['success'] == 1) {
+                echo '<div class="alert alert-success" role="alert">';
+                echo 'Der Newsletter wurde erfolgreich validiert!';
+                echo '</div>';
+            }
+        ?>
+
         <a href="createNewsletter.php" class="btn btn-primary">Newsletter erstellen</a>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             

@@ -10,6 +10,14 @@
 </head>
 <body>
     <?php include('header.php'); ?>
+    <?php
+    if (isset($_GET['success']) && $_GET['success'] == 1) {
+        echo '<div class="alert alert-success mt-3" role="alert">';
+        echo 'Die Registrierung war erfolgreich!';
+        echo '</div>';
+    }
+    ?>
+
 
     <div class="container">
         <div class="jumbotron text-center">

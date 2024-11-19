@@ -38,11 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo '</div>';
     } else {
         // Daten erfolgreich validiert
-        echo '<div class="container mt-3">';
-        echo '<div class="alert alert-success" role="alert">';
-        echo 'Der Newsletter wurde erfolgreich validiert!';
-        echo '</div>';
-        echo '</div>';
+        header("Location: ../newsletter.php?success=1");
+        exit(); // WICHTIG: Beendet das aktuelle Skript
     }
 } else {
     // Wenn die Seite direkt aufgerufen wird, zeige nur das Formular

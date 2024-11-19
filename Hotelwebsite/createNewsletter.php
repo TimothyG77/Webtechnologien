@@ -9,8 +9,9 @@
 </head>
 <body>
 <div class="container mt-5">
+    
     <h1 class="text-center mb-4">Newsletter erstellen</h1>
-    <form action="form/newsletter-form.php" method="post">
+    <form action="/Webtechnologien/Hotelwebsite/form/newsletter-form.php" method="post">
         <!-- Titel des Newsletters -->
         <div class="mb-3">
             <label for="title" class="form-label">Titel</label>

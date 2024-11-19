@@ -1,62 +1,39 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="stylesheet_bootstrap.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <?php include('header.php'); ?>
-    <header>
-        <h1>Login</h1>
-        <nav>
-            <ul>
-                <li>
-                    <a href="startseite.php">
-                        <img src="images/Home-Button-Icon.jpg" alt="arial picture of the home button logo">
-                    </a>
-                </li>
-                <li>
-                    <a href="impressum.php"><img src="images/Telefon Icon.png" alt="Telefon Icon"></a>
-                </li>
-                <li>
-                    <a href="impressum.php"><img src="images/Email Icon.png" alt="E-Mail Icon"></a>
-                </li>
-                <li>
-                    <a href="https://www.instagram.com/"><img src="images/Instagram Icon.webp" alt="Instagram Icon"></a>
-                </li>
-                <li>
-                    <a href="https://www.facebook.com/"><img src="images/Facebook Icon.svg" alt="Facebook Icon"></a>
-                </li>
-                <li>
-                    <a href="register.html">Register</a>
-                </li>
-            </ul>    
-        </nav>
-    </header>
+<div class="container mt-5">
+    <h2>Login</h2>
 
-    <main>
-        <div class="section-wrapper-login">
-            <section>
-                <form action="/submit_login" method="post">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                    
-        
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                    
-        
-                    <button type="submit">Login</button>
-                </form>
-            </section>
+    <!-- Fehler- oder Erfolgsmeldung anzeigen -->
+    <?php
+    if (isset($_GET['error']) && $_GET['error'] === 'invalid_credentials') {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo 'Ungültiger Benutzername oder Passwort.';
+        echo '</div>';
+    }
+    ?>
+
+    <form action="/Webtechnologien/Hotelwebsite/form/login-form.php" method="POST" class="p-4 border rounded bg-light">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
         </div>
-    </main>
-
-    <?php include('footer.php'); ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+<?php include('footer.php'); ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
