@@ -6,13 +6,15 @@
     <title>Room Reservations</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
 </head>
-<body>
+<body class="reservation-background">
 <?php include('header.php'); ?>
 
 <div class="container mt-5">
-    <h2>Room Reservations</h2>
-
+    <div class="title-box">
+        <h2 class="impressum-text-center">Room Reservations</h2>
+    </div>
     <!-- Form für neue Reservierungen -->
     <div class="card mb-4">
         <div class="card-header">

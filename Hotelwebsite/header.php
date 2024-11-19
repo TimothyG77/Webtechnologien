@@ -1,6 +1,23 @@
-<!-- inc/header.php -->
 <header class="bg-primary text-white text-center p-4">
-    <h1>GD Hotel</h1>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <a href="/Webtechnologien/Hotelwebsite/home.php" class="icon-link" title="GD Hotel Home">
+                <img src="images/Home-Button-Icon.jpg" alt="GD Logo" class="icon-img">
+            </a>
+            <h1 class="mb-0">GD Hotel</h1>
+        </div>
+        <div class="icon-container d-flex justify-content-center mb-2">
+            <a href="https://www.instagram.com/accounts/login/" target="_blank" class="icon-link mx-3" title="Instagram">
+                <img src="images/Instagram Icon.webp" alt="Instagram" class="icon-img">
+            </a>
+            <a href="https://www.instagram.com/accounts/login/" target="_blank" class="icon-link mx-3" title="Facebook">
+                <img src="images/Facebook-Logo.png" alt="Facebook" class="icon-img">
+            </a>
+            <a href="/Webtechnologien/Hotelwebsite/impressum.php" class="icon-link mx-3" title="Impressum">
+                <img src="images/Email Icon.png" alt="Mail" class="icon-img">
+            </a>
+        </div>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/Webtechnologien/Hotelwebsite/home.php">Home</a>
@@ -14,10 +31,10 @@
                     <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/hilfe.php">Help/FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/newsletter.php">Newsletter</a></li>
                     <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/impressum.php">Impressum</a></li>
-                    
                     <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/reservation.php">Reservation</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
+

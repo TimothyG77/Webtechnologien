@@ -4,72 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help / FAQ</title>
-    <link rel="stylesheet" href="stylesheet_bootstrap.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
 </head>
-<body>
+<body class="help-background help-page">
 <?php include('header.php'); ?>
-    <header>
-        <h1>Help / FAQ</h1>
-        <nav>
-            <ul>
-                <li>
-                    <a href="startseite.php">
-                        <img src="images/Home-Button-Icon.jpg" alt="arial picture of the home button logo">
-                    </a>
-                </li>
-                <li>
-                    <a href="impressum.php"><img src="images/Telefon Icon.png" alt="Telefon Icon"></a>
-                </li>
-                <li>
-                    <a href="impressum.html"><img src="images/Email Icon.png" alt="E-Mail Icon"></a>
-                </li>
-                <li>
-                    <a href="https://www.instagram.com/"><img src="images/Instagram Icon.webp" alt="Instagram Icon"></a>
-                </li>
-                <li>
-                    <a href="https://www.facebook.com/"><img src="images/Facebook Icon.svg" alt="Facebook Icon"></a>
-                </li>
-                <li>
-                    <a href="login.html">Login</a>
-                </li>
-                <li>
-                    <a href="register.html">Register</a>
-                </li>
-            </ul>    
-        </nav>
-    </header>
-
-    <main>
-        <div class="section-wrapper-help">
-            <section>
-                <h2>User Guide</h2>
-                <p>Welcome to the GD Hotel website! Here is a quick guide on how to use the website:</p>
-                <ul>
-                    <li>To reserve a room you must first register. You can do this via the “Register” link on the homepage.</li>
-                    <li>After registering and logging in, you can make your booking under “Reserve a room”. Here you specify the desired period and any additional services such as breakfast or parking.</li>
-                    <li>You can view and manage your previous reservations at any time under “My Reservations”.</li>
-                    <li>If you have any questions or need support, our customer service is available to you at any time. You can find our contact details under “Contact”.</li>
-                    <li>The imprint and further information about the website can be found at the end of the page under “Imprint”.</li>
-                </ul>
-
-                <h2>How can I reserve a room?</h2>
-                <p>To reserve a room, you must register and log in on our website. You can then check availability and make a booking under “Reserve a room”.</p>
-
-                <h2>How can I cancel my reservation?</h2>
-                <p>Once you are logged in, you can manage and cancel your reservations under "My Reservations".</p>
-
-                <h2>Which payment methods are accepted?</h2>
-                <p>We accept payments by credit card and PayPal. More payment methods will be added soon.</p>
-
-                <h2>How can I contact customer service?</h2>
-                <p>You can reach us by email at support@gd-hotel.at or call us by phone at +43 (0)1 234 56789.</p>
-
-                <h2>Is there parking?</h2>
-                <p>Yes, you can optionally book a parking space when booking.</p>
-            </section>
+<main class="container mt-5">
+    <div class="faq-container">
+        <div class="question-box" data-bs-toggle="modal" data-bs-target="#modal1">
+            <h3>How can I reserve a room?</h3>
         </div>
-    </main>
+        <div class="question-box" data-bs-toggle="modal" data-bs-target="#modal2">
+            <h3>How can I cancel my reservation?</h3>
+        </div>
+        <div class="question-box" data-bs-toggle="modal" data-bs-target="#modal3">
+            <h3>Which payment methods are accepted?</h3>
+        </div>
+        <div class="question-box" data-bs-toggle="modal" data-bs-target="#modal4">
+            <h3>How can I contact customer service?</h3>
+        </div>
+        <div class="question-box" data-bs-toggle="modal" data-bs-target="#modal5">
+            <h3>Is there parking?</h3>
+        </div>
+    </div>
+</main>
+
+<!-- Modale Fenster für Antworten -->
+<div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel1">How can I reserve a room?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                To reserve a room, you must register and log in on our website. You can then check availability and make a booking under “Reserve a room”.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel2">How can I cancel my reservation?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Once you are logged in, you can manage and cancel your reservations under "My Reservations".
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modalLabel3" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel3">Which payment methods are accepted?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                We accept payments by credit card and PayPal. More payment methods will be added soon.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="modalLabel4" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel4">How can I contact customer service?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                You can reach us by email at support@gd-hotel.at or call us by phone at +43 (0)1 234 56789.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal5" tabindex="-1" aria-labelledby="modalLabel5" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel5">Is there parking?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Yes, you can optionally book a parking space when booking.
+            </div>
+        </div>
+    </div>
+</div>
+
 
     
 
