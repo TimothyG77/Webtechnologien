@@ -1,3 +1,9 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); 
+}
+?>
+
 
 <header class="bg-primary text-white text-center p-4">
     <div class="d-flex justify-content-between align-items-center">
@@ -39,7 +45,7 @@
                     <?php endif; ?>
                     <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/hilfe.php">Help/FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/newsletter.php">Newsletter</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/impressum.php">Impressum</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/impressum.php">Imprint</a></li>
                     <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/reservation.php">Reservation</a></li>
                 </ul>
             </div>
