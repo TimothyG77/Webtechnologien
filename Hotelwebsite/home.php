@@ -1,4 +1,18 @@
-<!-- index.php -->
+<?php
+session_start();
+
+if (isset($_SESSION['registration_success']) && $_SESSION['registration_success']) {
+    echo "<div class='alert alert-success mt-3' role='alert'>Die Registrierung war erfolgreich.</div>";
+    unset($_SESSION['registration_success']);
+}
+
+if (isset($_SESSION['reservation_success']) && $_SESSION['reservation_success']) {
+    echo "<div class='alert alert-success mt-3' role='alert'>Die Reservierung war erfolgreich.</div>";
+    unset($_SESSION['reservation_success']);
+}
+?>
+
+<!-- Restlicher Inhalt von home.php -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -10,14 +24,6 @@
 </head>
 <body>
     <?php include('header.php'); ?>
-    <?php
-    if (isset($_GET['success']) && $_GET['success'] == 1) {
-        echo '<div class="alert alert-success mt-3" role="alert">';
-        echo 'Die Registrierung war erfolgreich!';
-        echo '</div>';
-    }
-    ?>
-
 
     <div class="container">
         <div class="jumbotron text-center">

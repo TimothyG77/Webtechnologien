@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $check_in = $_POST['check_in'];
     $check_out = $_POST['check_out'];
@@ -11,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo '<div class="alert alert-danger" role="alert">';
         echo 'Check-out date must be later than check-in date.';
         echo '</div>';
-        include('../reservations.php');
+        include('../reservation.php');
         exit();
     }
 
@@ -30,8 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     fputcsv($file_handle, $new_reservation);
     fclose($file_handle);
 
-    // Weiterleitung bei Erfolg
-    header("Location: ../reservations.php?success=1");
+    // Session-Variable setzen und Weiterleitung bei Erfolg
+    $_SESSION['reservation_success'] = true;
+    header("Location: ../home.php");
     exit();
 }
 ?>

@@ -1,4 +1,6 @@
 <?php
+session_start(); // Session starten
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Eingaben aus dem Formular holen
     $username = trim($_POST['username']);
@@ -22,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($stored_username === $username && $stored_password === $password) {
                 $user_found = true;
+
+                // Benutzerdaten in der Session speichern
+                $_SESSION['username'] = $stored_username;
                 break;
             }
         }

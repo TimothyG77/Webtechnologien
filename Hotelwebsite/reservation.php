@@ -27,15 +27,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="check_out" class="form-label">Check-out Date</label>
-                    <input type="date" class="form-control" id="check_out" name="check_out" required>
+                    <input type="date" class="form-control" id="check_out" name="check_out" value="" required>
                 </div>
 
                 <!-- Frühstück -->
                 <div class="mb-3">
                     <label for="breakfast" class="form-label">Breakfast</label>
                     <select class="form-select" id="breakfast" name="breakfast" required>
-                        <option value="yes">With Breakfast</option>
-                        <option value="no">Without Breakfast</option>
+                        <option value="yes" <?php echo (isset($_POST['breakfast']) && $_POST['breakfast'] === 'yes') ? 'selected' : ''; ?>>With Breakfast</option>
+                        <option value="no" <?php echo (isset($_POST['breakfast']) && $_POST['breakfast'] === 'no') ? 'selected' : ''; ?>>Without Breakfast</option>
                     </select>
                 </div>
 
@@ -43,15 +43,15 @@
                 <div class="mb-3">
                     <label for="parking" class="form-label">Parking</label>
                     <select class="form-select" id="parking" name="parking" required>
-                        <option value="yes">With Parking</option>
-                        <option value="no">Without Parking</option>
+                        <option value="yes" <?php echo (isset($_POST['parking']) && $_POST['parking'] === 'yes') ? 'selected' : ''; ?>>With Parking</option>
+                        <option value="no" <?php echo (isset($_POST['parking']) && $_POST['parking'] === 'no') ? 'selected' : ''; ?>>Without Parking</option>
                     </select>
                 </div>
 
                 <!-- Haustiere -->
                 <div class="mb-3">
                     <label for="pets" class="form-label">Pets</label>
-                    <input type="text" class="form-control" id="pets" name="pets" placeholder="Specify pets (if any)">
+                    <input type="text" class="form-control" id="pets" name="pets" value="<?php echo isset($_POST["pets"]) ? $_POST["pets"] : ''; ?>" placeholder="Specify pets (if any)">
                 </div>
 
                 <!-- Abschicken -->

@@ -1,2 +1,11 @@
 "Reservation ID",Check-in,Check-out,Breakfast,Parking,Pets,Status
 673c4ab095744,2024-05-05,2024-05-30,yes,yes,,New
+673c8a05dec6c,2024-05-04,2024-05-31,yes,yes,,New
+673c8b446249b,2024-10-01,2024-11-08,yes,yes,,New
+673c8b68b1696,2024-10-01,2024-11-08,yes,yes,,New
+673c8b898292c,2024-11-04,2024-11-22,no,yes,,New
+673c956b4597f,2024-11-04,2024-11-19,yes,yes,,New
+673cc19696585,2024-11-04,2024-11-30,no,no,Dog,New
+673cc48cd92fa,2024-11-04,2024-11-30,yes,yes,,New
+673ccc1fa88a2,2024-11-05,2024-11-30,no,no,Dog,New
+673ccc4e1a7b7,2024-11-04,2024-11-30,no,no,Dog,New
