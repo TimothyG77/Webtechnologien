@@ -28,9 +28,9 @@
             <label for="salutation" class="form-label">Salutation</label>
             <select class="form-select" id="salutation" name="salutation" required>
                 <option value="">Please choose...</option>
-                <option value="Herr" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Herr') ? 'selected' : ''; ?>>Herr</option>
-                <option value="Frau" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Frau') ? 'selected' : ''; ?>>Frau</option>
-                <option value="Divers" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Divers') ? 'selected' : ''; ?>>Divers</option>
+                <option value="Man" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Man') ? 'selected' : ''; ?>>Man</option>
+                <option value="Woman" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Woman') ? 'selected' : ''; ?>>Woman</option>
+                <option value="Diverse" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Diverse') ? 'selected' : ''; ?>>Diverse</option>
             </select>
         </div>
 
