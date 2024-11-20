@@ -47,6 +47,7 @@ $salutation = isset($user_data[2]) ? $user_data[2] : '';      // Anrede (Index 2
     <title>Profile</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
 </head>
 <body>
 <?php include('header.php'); ?>

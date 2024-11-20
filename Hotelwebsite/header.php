@@ -27,7 +27,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/home.php">Home</a></li>
+                    
                     <?php if (isset($_SESSION['username'])): ?>
                         <!-- Eingeloggter Benutzer -->
                         <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/profile.php">Profile</a></li>
