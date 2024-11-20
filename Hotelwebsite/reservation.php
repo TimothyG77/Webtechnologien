@@ -61,49 +61,6 @@
             </form>
         </div>
     </div>
-
-    <!-- Liste der bestehenden Reservierungen -->
-    <div class="card">
-        <div class="card-header">
-            <h5>Your Reservations</h5>
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Reservation ID</th>
-                        <th>Check-in</th>
-                        <th>Check-out</th>
-                        <th>Breakfast</th>
-                        <th>Parking</th>
-                        <th>Pets</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Statische Daten -->
-                    <tr>
-                        <td>1</td>
-                        <td>2024-11-20</td>
-                        <td>2024-11-25</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                        <td>Dog</td>
-                        <td>Confirmed</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2024-12-01</td>
-                        <td>2024-12-05</td>
-                        <td>No</td>
-                        <td>Yes</td>
-                        <td>None</td>
-                        <td>New</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 
 <?php include('footer.php'); ?>
