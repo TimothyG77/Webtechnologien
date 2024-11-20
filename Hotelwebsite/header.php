@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 8bc2511e4fb31da9005bceb2b28cd6890c4ca366
 <header class="bg-primary text-white text-center p-4">
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
