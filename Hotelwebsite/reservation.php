@@ -1,3 +1,17 @@
+<?php
+// PHP-Block am Anfang zur Überprüfung der Reservierungsdaten
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $check_in = $_POST['check_in'];
+    $check_out = $_POST['check_out'];
+
+    if (strtotime($check_out) <= strtotime($check_in)) {
+        // Umleitung zur aktuellen Seite mit Fehlermeldung
+        header("Location: ../reservation.php?error=checkin_checkout");
+        exit();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +20,7 @@
     <title>Room Reservations</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
+    <link rel="stylesheet" href="css-stylesheet-bootstrap.css?v=<?php echo time(); ?>">
 </head>
 <body class="reservation-background">
 <?php include('header.php'); ?>
@@ -15,6 +29,16 @@
     <div class="title-box">
         <h2 class="impressum-text-center">Room Reservations</h2>
     </div>
+
+    <!-- Fehlermeldung anzeigen, wenn der Fehler-Parameter gesetzt ist -->
+    <?php
+    if (isset($_GET['error']) && $_GET['error'] == 'checkin_checkout') {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo 'Check-out date must be later than check-in date.';
+        echo '</div>';
+    }
+    ?>
+    
     <!-- Form für neue Reservierungen -->
     <div class="card mb-4">
         <div class="card-header">

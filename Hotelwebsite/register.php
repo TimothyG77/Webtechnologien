@@ -19,7 +19,33 @@
         echo 'Registration was successful!';
         echo '</div>';
     }
+    
+    
+    if (isset($_GET['error']) && $_GET['error'] == 'password_error') {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo 'Password is incorrect. Try again.';
+        echo '</div>';
+    }
+    if (isset($_GET['error']) && $_GET['error'] == 'email_error') {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo 'Please enter a valid email address.';
+        echo '</div>';
+    }
+    //password
+    if (isset($_GET['error']) && $_GET['error'] == 'password_symbols_error') {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo 'The password must be at least 8 characters long, contain at least one number, and one special character.';
+        echo '</div>';
+    }
+    //user exists
+    if (isset($_GET['error']) && $_GET['error'] == 'user_exists_error') {
+        echo '<div class="alert alert-danger" role="alert">';
+                echo 'The username is already taken. Please choose a different one.';
+                echo '</div>';
+    }
     ?>
+    
+    
 
     <form action="/Webtechnologien/Hotelwebsite/form/register-form.php" method="POST" class="p-4 border rounded bg-light">
         <!-- Anrede -->

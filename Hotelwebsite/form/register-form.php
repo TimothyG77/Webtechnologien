@@ -22,11 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         while (($user_data = fgetcsv($file_handle)) !== false) {
             if (trim($user_data[0]) === $form_data['username']) { // Benutzername-Spalte
                 fclose($file_handle);
-                echo '<div class="alert alert-danger" role="alert">';
-                echo 'The username is already taken. Please choose a different one.';
-                echo '</div>';
-                include('../register.php');
-                exit();
+                header("Location: ../register.php?error=user_exists_error");
+            exit();
             }
         }
         fclose($file_handle);
@@ -36,28 +33,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strlen($password) < 8 || 
         !preg_match('/[0-9]/', $password) || 
         !preg_match('/[\W]/', $password)) {
-        echo '<div class="alert alert-danger" role="alert">';
-        echo 'The password must be at least 8 characters long, contain at least one number, and one special character.';
-        echo '</div>';
-        include('../register.php');
-        exit();
+            header("Location: ../register.php?error=password_symbols_error");
+            exit();
     }
 
     // Passwörter vergleichen
     if ($password !== $confirm_password) {
-        echo '<div class="alert alert-danger" role="alert">';
-        echo 'The passwords do not match. Please try again.';
-        echo '</div>';
-        include('../register.php');
+        header("Location: ../register.php?error=password_error");
         exit();
+    
     }
 
     // E-Mail überprüfen
     if (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
-        echo '<div class="alert alert-danger" role="alert">';
-        echo 'Please enter a valid email address.';
-        echo '</div>';
-        include('../register.php');
+        header("Location: ../register.php?error=email_error");
         exit();
     }
 

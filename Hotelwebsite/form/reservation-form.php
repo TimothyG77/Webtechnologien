@@ -10,10 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validierung: Abreisedatum nach Anreisedatum
     if (strtotime($check_out) <= strtotime($check_in)) {
-        echo '<div class="alert alert-danger" role="alert">';
-        echo 'Check-out date must be later than check-in date.';
-        echo '</div>';
-        include('../reservation.php');
+        header("Location: ../reservation.php?error=checkin_checkout");
         exit();
     }
 
