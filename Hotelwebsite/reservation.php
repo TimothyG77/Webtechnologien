@@ -1,17 +1,10 @@
 <?php
-// PHP-Block am Anfang zur Überprüfung der Reservierungsdaten
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $check_in = $_POST['check_in'];
-    $check_out = $_POST['check_out'];
-
-    if (strtotime($check_out) <= strtotime($check_in)) {
-        // Umleitung zur aktuellen Seite mit Fehlermeldung
-        header("Location: ../reservation.php?error=checkin_checkout");
-        exit();
-    }
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Start the session only if it hasn't been started already
 }
-?>
 
+$reservation_form_data = $_SESSION['reservation_form_data'] ?? []; // Retrieve the stored form data if available
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2 class="impressum-text-center">Room Reservations</h2>
     </div>
 
-    <!-- Fehlermeldung anzeigen, wenn der Fehler-Parameter gesetzt ist -->
+    <!-- Display error message if the error parameter is set -->
     <?php
     if (isset($_GET['error']) && $_GET['error'] == 'checkin_checkout') {
         echo '<div class="alert alert-danger" role="alert">';
@@ -38,49 +31,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo '</div>';
     }
     ?>
-    
-    <!-- Form für neue Reservierungen -->
+
+    <!-- Form for new reservations -->
     <div class="card mb-4">
         <div class="card-header">
             <h5>New Reservation</h5>
         </div>
         <div class="card-body">
             <form action="/Webtechnologien/Hotelwebsite/form/reservation-form.php" method="POST">
-                <!-- Anreise- und Abreisedatum -->
+                <!-- Check-in and Check-out dates -->
                 <div class="mb-3">
                     <label for="check_in" class="form-label">Check-in Date</label>
-                    <input type="date" class="form-control" id="check_in" name="check_in" required>
+                    <input type="date" class="form-control" id="check_in" name="check_in" 
+                           value="<?php echo htmlspecialchars($reservation_form_data['check_in'] ?? ''); ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="check_out" class="form-label">Check-out Date</label>
-                    <input type="date" class="form-control" id="check_out" name="check_out" value="" required>
+                    <input type="date" class="form-control" id="check_out" name="check_out" 
+                           value="<?php echo htmlspecialchars($reservation_form_data['check_out'] ?? ''); ?>" required>
                 </div>
 
-                <!-- Frühstück -->
-                <div class="mb-3">
-                    <label for="breakfast" class="form-label">Breakfast</label>
-                    <select class="form-select" id="breakfast" name="breakfast" required>
-                        <option value="yes" <?php echo (isset($_POST['breakfast']) && $_POST['breakfast'] === 'yes') ? 'selected' : ''; ?>>With Breakfast</option>
-                        <option value="no" <?php echo (isset($_POST['breakfast']) && $_POST['breakfast'] === 'no') ? 'selected' : ''; ?>>Without Breakfast</option>
-                    </select>
+                <!-- Breakfast and Parking options -->
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="breakfast" name="breakfast" value="yes"
+                           <?php echo isset($reservation_form_data['breakfast']) && $reservation_form_data['breakfast'] === 'yes' ? 'checked' : ''; ?>>
+                    <label class="form-check-label" for="breakfast">Breakfast</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="parking" name="parking" value="yes"
+                           <?php echo isset($reservation_form_data['parking']) && $reservation_form_data['parking'] === 'yes' ? 'checked' : ''; ?>>
+                    <label class="form-check-label" for="parking">Parking</label>
                 </div>
 
-                <!-- Parkplatz -->
-                <div class="mb-3">
-                    <label for="parking" class="form-label">Parking</label>
-                    <select class="form-select" id="parking" name="parking" required>
-                        <option value="yes" <?php echo (isset($_POST['parking']) && $_POST['parking'] === 'yes') ? 'selected' : ''; ?>>With Parking</option>
-                        <option value="no" <?php echo (isset($_POST['parking']) && $_POST['parking'] === 'no') ? 'selected' : ''; ?>>Without Parking</option>
-                    </select>
-                </div>
-
-                <!-- Haustiere -->
+                <!-- Pets -->
                 <div class="mb-3">
                     <label for="pets" class="form-label">Pets</label>
-                    <input type="text" class="form-control" id="pets" name="pets" value="<?php echo isset($_POST["pets"]) ? $_POST["pets"] : ''; ?>" placeholder="Specify pets (if any)">
+                    <input type="text" class="form-control" id="pets" name="pets" 
+                           value="<?php echo htmlspecialchars($reservation_form_data['pets'] ?? ''); ?>" placeholder="Specify pets (if any)">
                 </div>
 
-                <!-- Abschicken -->
+                <!-- Submit button -->
                 <button type="submit" class="btn btn-primary">Submit Reservation</button>
             </form>
         </div>

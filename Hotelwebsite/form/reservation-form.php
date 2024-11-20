@@ -1,20 +1,31 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $check_in = $_POST['check_in'];
     $check_out = $_POST['check_out'];
-    $breakfast = $_POST['breakfast'];
-    $parking = $_POST['parking'];
-    $pets = trim($_POST['pets']);
+    $breakfast = $_POST['breakfast'] ?? '';
+    $parking = $_POST['parking'] ?? '';
+    $pets = trim($_POST['pets'] ?? '');
 
-    // Validierung: Abreisedatum nach Anreisedatum
+    // Store form data in session
+    $_SESSION['reservation_form_data'] = [
+        'check_in' => $check_in,
+        'check_out' => $check_out,
+        'breakfast' => $breakfast,
+        'parking' => $parking,
+        'pets' => $pets,
+    ];
+
+    // Validation: Check-out date must be later than check-in date
     if (strtotime($check_out) <= strtotime($check_in)) {
         header("Location: ../reservation.php?error=checkin_checkout");
         exit();
     }
 
-    // Reservierungsdetails speichern (statisch oder in einer Datei/DB)
+    // Save reservation details (statically or in a file/DB)
     $reservation_file = '../reservations.csv';
     if (!file_exists($reservation_file)) {
         $file_handle = fopen($reservation_file, 'w');
@@ -22,14 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         fclose($file_handle);
     }
 
-    // Neue Reservierung hinzufügen
-    $reservation_id = uniqid(); // Einzigartige ID für die Reservierung
+    // Add new reservation
+    $reservation_id = uniqid(); // Unique ID for the reservation
     $new_reservation = [$reservation_id, $check_in, $check_out, $breakfast, $parking, $pets, 'New'];
     $file_handle = fopen($reservation_file, 'a');
     fputcsv($file_handle, $new_reservation);
     fclose($file_handle);
 
-    // Session-Variable setzen und Weiterleitung bei Erfolg
+    // Clear session form data upon success
+    unset($_SESSION['reservation_form_data']);
     $_SESSION['reservation_success'] = true;
     header("Location: ../home.php");
     exit();

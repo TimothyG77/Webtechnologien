@@ -1,64 +1,67 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Alle Felder erfassen
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+ // Start the session
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $form_data = [
-        'salutation' => trim($_POST['salutation']),
-        'first_name' => trim($_POST['first_name']),
-        'last_name' => trim($_POST['last_name']),
-        'email' => trim($_POST['email']),
-        'username' => trim($_POST['username']),
+        'salutation' => $_POST['salutation'],
+        'first_name' => $_POST['first_name'],
+        'last_name' => $_POST['last_name'],
+        'email' => $_POST['email'],
+        'username' => $_POST['username']
     ];
 
-    $password = trim($_POST['password']);
-    $confirm_password = trim($_POST['confirm_password']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
 
-    // Prüfen, ob der Benutzername bereits existiert
+    // Store the form data in the session in case of an error
+    $_SESSION['form_data'] = $form_data;
+
+    // Check if the user already exists
     $user_file = '../user.csv';
     if (file_exists($user_file)) {
         $file_handle = fopen($user_file, 'r');
-        // Kopfzeile überspringen
-        fgetcsv($file_handle);
+        fgetcsv($file_handle); // Skip header
 
         while (($user_data = fgetcsv($file_handle)) !== false) {
-            if (trim($user_data[0]) === $form_data['username']) { // Benutzername-Spalte
+            if (trim($user_data[0]) === $form_data['username']) { // Username column
                 fclose($file_handle);
                 header("Location: ../register.php?error=user_exists_error");
-            exit();
+                exit();
             }
         }
         fclose($file_handle);
     }
 
-    // Passwort-Anforderungen überprüfen
+    // Validate password requirements
     if (strlen($password) < 8 || 
         !preg_match('/[0-9]/', $password) || 
         !preg_match('/[\W]/', $password)) {
-            header("Location: ../register.php?error=password_symbols_error");
-            exit();
+        header("Location: ../register.php?error=password_symbols_error");
+        exit();
     }
 
-    // Passwörter vergleichen
+    // Compare passwords
     if ($password !== $confirm_password) {
         header("Location: ../register.php?error=password_error");
         exit();
-    
     }
 
-    // E-Mail überprüfen
+    // Validate email
     if (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
         header("Location: ../register.php?error=email_error");
         exit();
     }
 
-    // Benutzer speichern (in der CSV-Datei `user.csv`)
-    // Prüfen, ob CSV-Datei existiert, andernfalls Kopfzeile hinzufügen
+    // Save user (to the CSV file `user.csv`)
     if (!file_exists($user_file)) {
         $file_handle = fopen($user_file, 'w');
         fputcsv($file_handle, ['username', 'password', 'salutation', 'name', 'surname', 'email']);
         fclose($file_handle);
     }
 
-    // Neuen Benutzer hinzufügen
     $new_user = [
         $form_data['username'], 
         $password, 
@@ -71,7 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     fputcsv($file_handle, $new_user);
     fclose($file_handle);
 
-    // Weiterleitung bei Erfolg
+    // Clear session data upon successful registration
+    unset($_SESSION['form_data']);
+
+    // Redirect on success
     header("Location: ../home.php?success=1");
     exit();
 }

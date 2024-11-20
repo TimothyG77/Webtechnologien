@@ -1,4 +1,10 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
+$newsletter_form_data = $_SESSION['newsletter_form_data'] ?? []; // Retrieve the stored form data if available
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -20,7 +26,7 @@
                    id="title" 
                    name="title" 
                    placeholder="Titel des Newsletters" 
-                   value="<?php echo htmlspecialchars($_POST['title'] ?? '', ENT_QUOTES); ?>" 
+                   value="<?php echo htmlspecialchars($newsletter_form_data['title'] ?? '', ENT_QUOTES); ?>" 
                    required>
         </div>
 
@@ -32,7 +38,7 @@
                    id="subject" 
                    name="subject" 
                    placeholder="Betreff des Newsletters" 
-                   value="<?php echo htmlspecialchars($_POST['subject'] ?? '', ENT_QUOTES); ?>" 
+                   value="<?php echo htmlspecialchars($newsletter_form_data['subject'] ?? '', ENT_QUOTES); ?>" 
                    required>
         </div>
 
@@ -44,7 +50,7 @@
                       name="content" 
                       rows="8" 
                       placeholder="Inhalt des Newsletters" 
-                      required><?php echo htmlspecialchars($_POST['content'] ?? '', ENT_QUOTES); ?></textarea>
+                      required><?php echo htmlspecialchars($newsletter_form_data['content'] ?? '', ENT_QUOTES); ?></textarea>
         </div>
 
         <!-- Abschicken Button -->

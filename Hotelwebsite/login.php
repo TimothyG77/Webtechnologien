@@ -1,3 +1,10 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+ // Start the session
+$login_username = $_SESSION['login_username'] ?? ''; // Retrieve the stored username if available
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +18,11 @@
 <body class="login-background">
 <?php include('header.php'); ?>
 <div class="container mt-5">
-    <!-- Fehler- oder Erfolgsmeldung anzeigen -->
+    <!-- Display error message -->
     <?php
     if (isset($_GET['error']) && $_GET['error'] === 'invalid_credentials') {
         echo '<div class="alert alert-danger" role="alert">';
-        echo 'Ungültiger Benutzername oder Passwort.';
+        echo 'Invalid username or password.';
         echo '</div>';
     }
     ?>
@@ -24,7 +31,7 @@
         <h2 class="form-title-login">Login</h2>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" required>
+            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($login_username); ?>" required>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

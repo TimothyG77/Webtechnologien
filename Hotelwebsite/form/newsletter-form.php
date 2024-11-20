@@ -1,13 +1,25 @@
-<?php 
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+// Start the session
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
-    // Eingaben holen und trimmen
+    // Retrieve and trim inputs
     $title = trim($_POST['title'] ?? '');
     $subject = trim($_POST['subject'] ?? '');
     $content = trim($_POST['content'] ?? '');
 
-    // Validierung
+    // Store form data in session
+    $_SESSION['newsletter_form_data'] = [
+        'title' => $title,
+        'subject' => $subject,
+        'content' => $content,
+    ];
+
+    // Validation
     if (empty($title)) {
         $errors[] = "Der Titel darf nicht leer sein.";
     } elseif (strlen($title) > 50) {
@@ -24,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Der Inhalt darf nicht leer sein.";
     }
 
-    // Wenn Fehler vorhanden sind, erneut das Formular anzeigen
+    // If errors exist, display the form again with the error messages
     if (!empty($errors)) {
         echo '<div class="container mt-3">';
         echo '<div class="alert alert-danger" role="alert">';
@@ -34,15 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         echo '</ul>';
         echo '</div>';
-        include '../createNewsletter.php'; // Zeigt das Formular erneut an
+        include '../createNewsletter.php'; // Show the form again
         echo '</div>';
     } else {
-        // Daten erfolgreich validiert
+        // Data validated successfully, clear session data and redirect
+        unset($_SESSION['newsletter_form_data']);
         header("Location: ../newsletter.php?success=1");
-        exit(); // WICHTIG: Beendet das aktuelle Skript
+        exit(); // IMPORTANT: Terminate the current script
     }
 } else {
-    // Wenn die Seite direkt aufgerufen wird, zeige nur das Formular
+    // If the page is accessed directly, show only the form
     include '../createNewsletter.php';
 }
 ?>
