@@ -6,11 +6,14 @@
     <title>Newsletter</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
 </head>
-<body>
+<body class="newsletter-background">
 <?php include('header.php'); ?>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Unsere Newsletter</h1>
+        <div class="p-4 border rounded bg-light mb-4">
+            <h1 class="form-title-newsletter text-center">Our Newsletter</h1>
+        </div>
         <?php 
             if (isset($_GET['success']) && $_GET['success'] == 1) {
                 echo '<div class="alert alert-success" role="alert">';

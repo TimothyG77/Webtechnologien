@@ -1,5 +1,14 @@
-<!-- inc/footer.php -->
-<footer class="bg-dark text-white text-center p-3">
-    <p>&copy; 2024 GD Hotel GmbH</p>
-    <p><a href="/Webtechnologien/Hotelwebsite/home.php" class="text-white">Home</a> | <a href="/Webtechnologien/Hotelwebsite/hilfe.php" class="text-white">Help/FAQ</a>| <a href="/Webtechnologien/Hotelwebsite/newsletter.php" class="text-white">Newsletter</a> | <a href="/Webtechnologien/Hotelwebsite/impressum.php" class="text-white">Impressum</a></p>
+<footer class="bg-dark text-white text-center p-4">
+    <div class="container">
+        <p class="mb-2">&copy; 2024 GD Hotel GmbH</p>
+        <ul class="list-inline mb-0">
+            <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/home.php" class="footer-link">Home</a></li>
+            <li class="list-inline-item"><span class="separator">|</span></li>
+            <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/hilfe.php" class="footer-link">Help/FAQ</a></li>
+            <li class="list-inline-item"><span class="separator">|</span></li>
+            <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/newsletter.php" class="footer-link">Newsletter</a></li>
+            <li class="list-inline-item"><span class="separator">|</span></li>
+            <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/impressum.php" class="footer-link">Impressum</a></li>
+        </ul>
+    </div>
 </footer>

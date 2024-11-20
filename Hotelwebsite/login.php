@@ -6,12 +6,11 @@
     <title>Login</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
 </head>
-<body>
+<body class="login-background">
 <?php include('header.php'); ?>
 <div class="container mt-5">
-    <h2>Login</h2>
-
     <!-- Fehler- oder Erfolgsmeldung anzeigen -->
     <?php
     if (isset($_GET['error']) && $_GET['error'] === 'invalid_credentials') {
@@ -22,6 +21,7 @@
     ?>
 
     <form action="/Webtechnologien/Hotelwebsite/form/login-form.php" method="POST" class="p-4 border rounded bg-light">
+        <h2 class="form-title-login">Login</h2>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username" required>

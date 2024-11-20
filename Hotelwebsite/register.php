@@ -6,11 +6,11 @@
     <title>Register</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
 </head>
-<body>
+<body class="register-background">
 <?php include('header.php'); ?>
 <div class="container mt-5">
-    <h2>Register</h2>
 
     <!-- Erfolgsmeldung anzeigen -->
     <?php 
@@ -23,13 +23,14 @@
 
     <form action="/Webtechnologien/Hotelwebsite/form/register-form.php" method="POST" class="p-4 border rounded bg-light">
         <!-- Anrede -->
+         <h2 class="form-title">Register</h2>
         <div class="mb-3">
             <label for="salutation" class="form-label">Salutation</label>
             <select class="form-select" id="salutation" name="salutation" required>
                 <option value="">Please choose...</option>
-                <option value="Herr" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Herr') ? 'selected' : ''; ?>>Herr</option>
-                <option value="Frau" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Frau') ? 'selected' : ''; ?>>Frau</option>
-                <option value="Divers" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Divers') ? 'selected' : ''; ?>>Divers</option>
+                <option value="Man" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Man') ? 'selected' : ''; ?>>Man</option>
+                <option value="Woman" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Woman') ? 'selected' : ''; ?>>Woman</option>
+                <option value="Diverse" <?php echo (isset($form_data['salutation']) && $form_data['salutation'] === 'Diverse') ? 'selected' : ''; ?>>Diverse</option>
             </select>
         </div>
 

@@ -1,0 +1,372 @@
+/* Global Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(90deg, #0a3266, #4285f4);
+    background-color: #343a40;
+    color:#ffffff
+}
+
+header h1 {
+    font-size: 2rem; /* Passt die Schriftgröße des Titels an */
+    margin-left: 10px; /* Abstand zwischen dem GD-Logo und dem Titel */
+}
+
+.introduction-display {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1.5s ease-out forwards;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.5rem;
+}
+
+/* Lead text styling */
+.introduction-lead-text {
+    font-size: 1.2rem;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInUp 2s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+.title-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.impressum-text-center {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-title {
+    text-align: center; /* Zentriert die Überschrift */
+    font-size: 2rem; /* Vergrößert die Schriftgröße */
+    margin-bottom: 20px; /* Fügt Abstand nach unten hinzu */
+    color: #333; /* Dunkle Schriftfarbe */
+    font-weight: bold; /* Fettgedruckte Schrift */
+}
+
+.form-title-login {
+    text-align: center; /* Zentriert die Überschrift */
+    font-size: 2rem; /* Vergrößert die Schriftgröße */
+    margin-bottom: 20px; /* Fügt Abstand nach unten hinzu */
+    color: #333; /* Dunkle Schriftfarbe */
+    font-weight: bold; /* Fettgedruckte Schrift */
+}
+
+.form-title-newsletter {
+    text-align: center; /* Zentriert die Überschrift */
+    font-size: 2rem; /* Vergrößert die Schriftgröße */
+    margin-bottom: 20px; /* Fügt Abstand nach unten hinzu */
+    color: #333; /* Dunkle Schriftfarbe */
+    font-weight: bold; /* Fettgedruckte Schrift */
+}
+
+
+
+/* Keyframes für die Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.navbar {
+    background: linear-gradient(90deg, #448ae6, #042963);
+    background-color: #343a40;
+    color:#ffffff
+}
+.navbar a {
+    color: #ffffff !important;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+.navbar a:hover {
+    color: #ffeb3b !important;
+}
+
+/* Jumbotron */
+.jumbotron {
+    background: linear-gradient(90deg, #07397a, #478af7);
+    background-color: #3992e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem; /* Fügt etwas Polsterung hinzu */
+}
+
+/* Karussell-Bildanpassung */
+.carousel-item img {
+    max-height: 800px; /* Maximale Höhe des Bildes */
+    max-width: 800px;
+    display: block;
+    margin: 0 auto; /* Zentriert das Bild */
+    margin-bottom: 30px;
+    object-fit: cover; /* Zuschneiden des Bildes, damit es in den Container passt */
+   
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(52, 58, 64, 0.8); /* Dunkler Hintergrund für die Pfeile */
+    border-radius: 50%; /* Runde Form */
+    padding: 10px; /* Abstand um die Pfeile */
+}
+
+/* Karussell-Navigation */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 30%; /* Verkleinert die Breite der Navigationsflächen */
+    opacity: 1s; /* Macht die Pfeile leicht transparent */
+    transition: opacity 0.6s, background-color 0.6s;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1; /* Macht die Pfeile beim Hover undurchsichtig */
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.8); /* Ändert die Hintergrundfarbe beim Hover */
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(90deg, #053068, #478af5);
+    background-color: #343a40;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 3px solid #ffc107; /* Optionaler Akzent am oberen Rand */
+    position: relative;
+    width: 100vw;
+
+}
+
+.footer .footer-link {
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: 500; /* Hebt die Links leicht hervor */
+    transition: color 0.3s;
+}
+
+.footer .footer-link:hover {
+    color: #ffffff;
+}
+
+.footer .separator {
+    color: #6c757d; /* Dezente Farbe für den Trennstrich */
+    margin: 0 5px;
+}
+
+footer a {
+    color: #ffc107;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+footer a:hover {
+    color: #ffffff;
+}
+
+/* Container für den Inhalt */
+.container {
+    flex: 1;
+    padding: 20px;
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.question-box {
+    background-color: rgba(38, 142, 228, 0.85);
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.question-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+    color: #000;
+    border-radius: 15px;
+}
+
+/* Icon Styling */
+.icon-container {
+    margin-bottom: 0; /* Entfernt den unteren Rand */
+}
+
+.icon-link {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.icon-link:hover {
+    transform: scale(1.1);
+    transform: scale(1.1); /* Vergrößert das Icon leicht beim Hover */
+}
+
+.icon-img {
+    width: 50px; /* Größe der Icons */
+    height: 50px;
+    border-radius: 50%; /* Runde Form für Icons */
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.icon-link:hover .icon-img {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.7); /* Leuchtender Hover-Effekt */
+}
+
+
+/* Success Alert */
+.alert-success {
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.home-background {
+    background-image: url('images/Light-Background.webp'); /* Pfad zu deinem Hintergrundbild */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.register-background {
+    background-image: url('images/GD-Hotel-Lounge.webp'); /* Pfad zu deinem Hintergrundbild */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh; /* Stellt sicher, dass die Seite das ganze Fenster abdeckt */
+}
+
+.login-background {
+    background-image: url('images/GD-Hotel-Bar.webp'); /* Pfad zu deinem Hintergrundbild */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh; /* Stellt sicher, dass die Seite das ganze Fenster abdeckt */
+}
+
+.help-background {
+    background-image: url('images/GD-Hotel-Stairs.webp'); /* Pfad zu deinem Hintergrundbild */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 20px;
+    color: #ffffff;
+}
+
+.newsletter-background {
+    background-image: url('images/Newspaper.webp'); /* Pfad zu deinem Hintergrundbild */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.imprint-background {
+    background-image: url('images/GD-Hotel-Lobby.webp'); /* Pfad zu deinem Hintergrundbild */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.reservation-background {
+    background-image: url('images/GD-Hotel-Hotelsuite.webp'); /* Pfad zu deinem Hintergrundbild */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.imprint-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imprint-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.imprint-background {
+    background-image: url('images/GD-Hotel-Lobby.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar a {
+        margin: 0 8px;
+    }
+
+    .footer {
+        padding: 15px 0;
+    }
+    .footer .footer-link {
+        font-size: 0.9rem; /* Kleinere Schriftgröße auf kleineren Bildschirmen */
+    }
+
+    .icon-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .jumbotron {
+        padding: 2rem;
+    }
+    .carousel-item img {
+        max-height: 300px; /* Reduziert die Höhe des Bildes auf kleineren Bildschirmen */
+        max-width: 100%; /* Passt die Breite auf kleinen Bildschirmen an */
+
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 10%; /* Erhöht die Breite der Navigationsflächen auf kleineren Bildschirmen */
+    }
+}
