@@ -8,7 +8,7 @@
             <li class="list-inline-item"><span class="separator">|</span></li>
             <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/newsletter.php" class="footer-link">Newsletter</a></li>
             <li class="list-inline-item"><span class="separator">|</span></li>
-            <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/impressum.php" class="footer-link">Impressum</a></li>
+            <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/impressum.php" class="footer-link">Imprint</a></li>
         </ul>
     </div>
 </footer>

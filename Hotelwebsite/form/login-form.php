@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user_found) {
         // Successful login, clear stored username and redirect to the homepage
         unset($_SESSION['login_username']);
-        header("Location: ../home.php?login=success");
+        header("Location: ../home.php?login_success=1");
         exit();
     } else {
         // Error, invalid login credentials

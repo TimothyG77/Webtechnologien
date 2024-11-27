@@ -4,14 +4,18 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 
-if (isset($_SESSION['registration_success']) && $_SESSION['registration_success']) {
-    echo "<div class='alert alert-success mt-3' role='alert'>Die Registrierung war erfolgreich.</div>";
+if (isset($_GET['registration_success']) && $_GET['registration_success']) {
+    echo "<div class='alert alert-success mt-3' role='alert'>Registration was successful.</div>";
     unset($_SESSION['registration_success']);
 }
+if (isset($_GET['reservation_success']) && $_GET['reservation_success'] == '1') {
+    echo "<div class='alert alert-success mt-3' role='alert'>Reservation was successful.</div>";
+}
 
-if (isset($_SESSION['reservation_success']) && $_SESSION['reservation_success']) {
-    echo "<div class='alert alert-success mt-3' role='alert'>Die Reservierung war erfolgreich.</div>";
-    unset($_SESSION['reservation_success']);
+
+if (isset($_GET['login_success']) && $_GET['login_success']) {
+    echo "<div class='alert alert-success mt-3' role='alert'>Login was successful.</div>";
+    
 }
 ?>
 
