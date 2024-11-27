@@ -119,7 +119,6 @@ header h1 {
     padding: 2rem; /* Fügt etwas Polsterung hinzu */
 }
 
-/* Karussell-Bildanpassung */
 .carousel-item img {
     max-height: 800px; /* Maximale Höhe des Bildes */
     max-width: 800px;
@@ -137,7 +136,7 @@ header h1 {
     padding: 10px; /* Abstand um die Pfeile */
 }
 
-/* Karussell-Navigation */
+
 .carousel-control-prev,
 .carousel-control-next {
     width: 30%; /* Verkleinert die Breite der Navigationsflächen */
@@ -338,7 +337,7 @@ footer a:hover {
 }
 
 
-/* Responsive Styles */
+
 @media (max-width: 768px) {
     .navbar a {
         margin: 0 8px;
