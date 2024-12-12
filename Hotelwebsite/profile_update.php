@@ -21,31 +21,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'email' => $email,
     ];
 
-    $user_file = 'user.csv';
-    $updated_data = [];
-    $update_success = false;
+    require_once('form/dbaccess.php');
 
-    if (file_exists($user_file)) {
-        $file_handle = fopen($user_file, 'r');
+    $db_obj = new mysqli($host, $user, $dbpassword, $database);
+    
+    if ($db_obj->connect_error) {
+        echo "Connection Error: " . $db_obj->connect_error;
+        exit();
+    }else{
+        $sql = "SELECT * FROM users";
+        $result = $db_obj -> query($sql);
+        $user_found = false;
 
-        // Ignore header
-        $header = fgetcsv($file_handle);
+        while ($row = $result->fetch_array()) { 
 
-        // Loop through user data
-        while (($data = fgetcsv($file_handle)) !== false) {
-            $stored_username = trim($data[0]);
-            $stored_password = trim($data[1]);
+            if (password_verify($current_password, $row['password']) && $row['username'] === $_SESSION['username']) {
 
-            if ($stored_username === $_SESSION['username']) {
-                // Check if current password is correct
-                if ($stored_password !== $current_password) {
-                    fclose($file_handle);
-                    header("Location: profile.php?error=wrong_password");
-                    exit();
-                }
-
-                // Validate new password if provided
-                if (!empty($new_password)) {
+                $user_found = true;
+                //check, if password is correct
+                if(!empty($new_password)){
                     if (strlen($new_password) < 8 ||
                         !preg_match('/[0-9]/', $new_password) ||
                         !preg_match('/[\W]/', $new_password)) {
@@ -53,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         exit();
                     }
                 }
+            
 
                 // Validate email format
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -60,49 +55,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit();
                 }
 
-                // Update user data
-                $new_password = empty($new_password) ? $stored_password : $new_password;
-                $updated_data[] = [
-                    $username,
-                    $new_password,
-                    $salutation,
-                    $name,
-                    $surname,
-                    $email,
-                ];
-                $update_success = true;
-            } else {
-                // Keep other users unchanged
-                $updated_data[] = $data;
+                if(!empty($new_password)){
+                    $u_password = password_hash($new_password, PASSWORD_DEFAULT) ;
+                }else{
+                    $u_password = $row['password'];
+                }
+                $sql= "
+                UPDATE users SET
+                salutation='".$salutation."',
+                firstname='".$name."',
+                lastname='".$surname."', 
+                useremail='".$email."',
+                username='".$username."', 
+                password='".$u_password."'
+                WHERE username = '".$_SESSION["username"]."'
+                ";
+                $result = $db_obj -> query($sql);
+            
+
+                echo 'execute hat funktioniert';
+                //header("Location: profile.php?update=success");
+                
+                //exit();
             }
         }
-
-        fclose($file_handle);
-    }
-
-    // Write updated data back to the file
-    if ($update_success) {
-        $file_handle = fopen($user_file, 'w');
-        fputcsv($file_handle, $header); // Write header back
-        foreach ($updated_data as $row) {
-            fputcsv($file_handle, $row);
+        echo $user_found;
+        if(!$user_found){
+            //header("Location: profile.php?error=wrong_password");
+                //exit();
         }
-        fclose($file_handle);
-
-        // Clear session form data on success
-        unset($_SESSION['profile_form_data']);
-
-        // Update the session username to reflect the new username
-        $_SESSION['username'] = $username;
-
-        // Redirect with success message
-        header("Location: profile.php?update=success");
-        exit();
-    } else {
-        // Error: User not found
-        header("Location: profile.php?error=user_not_found");
-        exit();
     }
+
+    
 } else {
     // Direct access is not allowed
     header("Location: profile.php");

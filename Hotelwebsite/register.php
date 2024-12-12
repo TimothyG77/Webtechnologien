@@ -54,7 +54,7 @@ $form_data = $_SESSION['form_data'] ?? []; // Retrieve the stored form data if a
             <select id="salutation" name="salutation" class="form-control">
                 <option value="Mr" <?php if (($form_data['salutation'] ?? '') == 'Mr') echo 'selected'; ?>>Mr</option>
                 <option value="Mrs" <?php if (($form_data['salutation'] ?? '') == 'Mrs') echo 'selected'; ?>>Mrs</option>
-                <option value="Ms" <?php if (($form_data['salutation'] ?? '') == 'Ms') echo 'selected'; ?>>Ms</option>
+                <option value="Divers" <?php if (($form_data['salutation'] ?? '') == 'Divers') echo 'selected'; ?>>Divers</option>
             </select>
         </div>
         <!-- First Name -->

@@ -8,31 +8,39 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php?error=not_logged_in");
     exit();
 }
+$profile_salutation;
+$profile_firstname;
+$profile_lastname;
+$profile_email;
+$profile_username;
+$current_password;
 
-// Fetch user data
-$username = $_SESSION['username'];
-$user_file = 'user.csv';
-$user_data = [];
+require_once'form/dbaccess.php';
+$db_obj = new mysqli($host, $user, $dbpassword, $database);
 
-if (file_exists($user_file)) {
-    $file_handle = fopen($user_file, 'r');
-    $header = fgetcsv($file_handle); // Skip header
+if ($db_obj->connect_error) {
+    echo "Connection Error: " . $db_obj -> connect_error;
+    exit();
+}else{
+    $sql = "SELECT * FROM users";
+    $result = $db_obj -> query($sql);
+    $user_found = false;
 
-    while (($data = fgetcsv($file_handle)) !== false) {
-        if (trim($data[0]) === $username) {
-            $user_data = $data;
+    while ($row = $result->fetch_array()) { 
+
+        if ($row['username'] === $_SESSION['username']) {
+            $profile_salutation = $row['salutation'];
+            $profile_firstname = $row['firstname'];
+            $profile_lastname = $row['lastname'];
+            $profile_email = $row['useremail'];
+            $profile_username = $row['username'];
+            $current_password = $row['password'];
             break;
         }
     }
-    fclose($file_handle);
 }
 
-// Assign fields from CSV data
-$current_password = isset($user_data[1]) ? $user_data[1] : '';
-$email = isset($user_data[5]) ? $user_data[5] : '';
-$name = isset($user_data[3]) ? $user_data[3] : '';
-$surname = isset($user_data[4]) ? $user_data[4] : '';
-$salutation = isset($user_data[2]) ? $user_data[2] : '';
+
 
 // Retrieve form data from session if available
 $profile_form_data = $_SESSION['profile_form_data'] ?? [];
@@ -52,7 +60,7 @@ $profile_form_data = $_SESSION['profile_form_data'] ?? [];
 
 <div class="container mt-5">
     <h2>Profile</h2>
-    <p>Welcome, <strong><?= htmlspecialchars($username); ?></strong>!</p>
+    <p>Welcome, <strong><?= htmlspecialchars($profile_username); ?></strong>!</p>
 
     <!-- Display error messages -->
     <?php
@@ -83,30 +91,30 @@ $profile_form_data = $_SESSION['profile_form_data'] ?? [];
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username"
-                   value="<?php echo htmlspecialchars($profile_form_data['username'] ?? $username); ?>" required>
+                   value="<?php echo htmlspecialchars($profile_username); ?>" required>
         </div>
         <div class="mb-3">
             <label for="salutation" class="form-label">Salutation</label>
             <select id="salutation" name="salutation" class="form-control">
-                <option value="Mr" <?php if (($profile_form_data['salutation'] ?? $salutation) == 'Mr') echo 'selected'; ?>>Mr</option>
-                <option value="Mrs" <?php if (($profile_form_data['salutation'] ?? $salutation) == 'Mrs') echo 'selected'; ?>>Mrs</option>
-                <option value="Ms" <?php if (($profile_form_data['salutation'] ?? $salutation) == 'Ms') echo 'selected'; ?>>Ms</option>
+                <option value="Mr" <?php if ($profile_salutation == 'Mr') echo 'selected'; ?>>Mr</option>
+                <option value="Mrs" <?php if ($profile_salutation == 'Mrs') echo 'selected'; ?>>Mrs</option>
+                <option value="Divers" <?php if ($profile_salutation == 'Divers') echo 'selected'; ?>>Divers</option>
             </select>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">First Name</label>
             <input type="text" class="form-control" id="name" name="name"
-                   value="<?php echo htmlspecialchars($profile_form_data['name'] ?? $name); ?>" required>
+                   value="<?php echo htmlspecialchars($profile_firstname); ?>" required>
         </div>
         <div class="mb-3">
             <label for="surname" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="surname" name="surname"
-                   value="<?php echo htmlspecialchars($profile_form_data['surname'] ?? $surname); ?>" required>
+                   value="<?php echo htmlspecialchars($profile_lastname); ?>" required>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email"
-                   value="<?php echo htmlspecialchars($profile_form_data['email'] ?? $email); ?>" required>
+                   value="<?php echo htmlspecialchars($profile_email); ?>" required>
         </div>
         <div class="mb-3">
             <label for="current_password" class="form-label">Current Password</label>
