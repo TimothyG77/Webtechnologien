@@ -12,8 +12,7 @@ $form_data = $_SESSION['form_data'] ?? []; // Retrieve the stored form data if a
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
+    <?php include('link.php'); ?>
 </head>
 <body class="register-background">
 <?php include('header.php'); ?>
@@ -47,7 +46,8 @@ $form_data = $_SESSION['form_data'] ?? []; // Retrieve the stored form data if a
     }
     ?>
 
-    <form action="/Webtechnologien/Hotelwebsite/form/register-form.php" method="POST" class="p-4 border rounded bg-light">
+
+    <form action="form/register-form.php" method="POST" class="p-4 border rounded bg-light">
         <!-- Salutation -->
         <div class="mb-3">
             <label for="salutation" class="form-label">Salutation</label>
@@ -90,5 +90,7 @@ $form_data = $_SESSION['form_data'] ?? []; // Retrieve the stored form data if a
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
+<?php include('footer.php'); ?>
+<?php include('script.php'); ?>
 </body>
 </html>

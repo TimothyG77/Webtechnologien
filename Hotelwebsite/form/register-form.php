@@ -68,15 +68,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $form_data['email']
         ];
 
-        $sql = "INSERT INTO `users` (`salutation`, `firstname`, `lastname`, `useremail`, `username`, `password`) VALUES (?, ?, ?, ?, ?, ?); " ;
+        $sql = "INSERT INTO `users` (`salutation`, `firstname`, `lastname`, `useremail`, `username`, `password`, `role`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?); " ;
         $stmt = $db_obj->prepare($sql);
-        $stmt->bind_param("ssssss", $u_salutation, $f_name, $l_name, $u_email, $u_name, $u_password);
+        $stmt->bind_param("ssssssss", $u_salutation, $f_name, $l_name, $u_email, $u_name, $u_password, $u_role, $u_status);
         $u_salutation = $form_data['salutation'];
         $f_name = $form_data['first_name'];
         $l_name = $form_data['last_name'];
         $u_email = $form_data['email'];
         $u_name = $form_data['username'];
         $u_password = password_hash($userpassword, PASSWORD_DEFAULT) ;
+        $u_role = 'user';
+        $u_status = 'active';
         $stmt->execute();
 
         // Clear session data upon successful registration

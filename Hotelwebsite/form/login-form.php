@@ -27,8 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         while ($row = $result->fetch_array()) { 
 
             if (password_verify($login_password, $row['password']) && $row['username'] === $login_username) {
+               if($row['status'] === 'inactive'){
+                header("Location: ../login.php?error=inactive_account");
+                exit();
+               } 
                $user_found = true;
                $_SESSION['username'] = $row['username'];
+               $_SESSION['role'] = $row['role'];
                break;
             }
         }

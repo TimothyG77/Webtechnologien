@@ -36,6 +36,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         while ($row = $result->fetch_array()) { 
 
             if (password_verify($current_password, $row['password']) && $row['username'] === $_SESSION['username']) {
+                $sql_users = "SELECT * FROM users";
+                $result_users = $db_obj -> query($sql_users);
+
+                while ($row_users = $result_users->fetch_array()) { 
+
+                    if ($row_users['username'] ===$_SESSION['username']) {
+                
+                    header("Location: ../profile.php?error=user_exists");
+                    exit();
+            }
+
+        }
 
                 $user_found = true;
                 //check, if password is correct
@@ -60,29 +72,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }else{
                     $u_password = $row['password'];
                 }
+
                 $sql= "
                 UPDATE users SET
-                salutation='".$salutation."',
-                firstname='".$name."',
-                lastname='".$surname."', 
-                useremail='".$email."',
-                username='".$username."', 
-                password='".$u_password."'
-                WHERE username = '".$_SESSION["username"]."'
+                salutation= ?,
+                firstname= ?,
+                lastname=?, 
+                useremail=?,
+                username=?, 
+                password=?
+                WHERE username = ?
                 ";
-                $result = $db_obj -> query($sql);
-            
 
-                echo 'execute hat funktioniert';
-                //header("Location: profile.php?update=success");
+                $stmt = $db_obj->prepare($sql);
+                $stmt->bind_param('sssssss', $salutation, $name, $surname, $email, $username, $u_password, $_SESSION["username"]);
+                $stmt->execute();
+            
+                header("Location: profile.php?update=success");
+                $_SESSION["username"] = $username;
                 
-                //exit();
+                exit();
             }
         }
         echo $user_found;
         if(!$user_found){
-            //header("Location: profile.php?error=wrong_password");
-                //exit();
+            header("Location: profile.php?error=wrong_password");
+                exit();
         }
     }
 

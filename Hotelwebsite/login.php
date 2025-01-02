@@ -12,9 +12,8 @@ $login_username = $_SESSION['login_username'] ?? ''; // Retrieve the stored user
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
-</head>
+    <?php include('link.php'); ?>
+</head>                       
 <body class="login-background">
 <?php include('header.php'); ?>
 <div class="container mt-5">
@@ -24,6 +23,11 @@ $login_username = $_SESSION['login_username'] ?? ''; // Retrieve the stored user
         echo '<div class="alert alert-danger" role="alert">';
         echo 'Invalid username or password.';
         echo '</div>';
+    }
+    if (isset($_GET['error']) && $_GET['error'] === 'inactive_account') {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo 'Your account is inactive. Please contact the administrator.';
+        echo '</div>';                                            
     }
     ?>
 
@@ -41,6 +45,6 @@ $login_username = $_SESSION['login_username'] ?? ''; // Retrieve the stored user
     </form>
 </div>
 <?php include('footer.php'); ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<?php include('script.php'); ?>
 </body>
 </html>

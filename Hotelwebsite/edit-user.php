@@ -3,40 +3,40 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Access restriction: Only logged-in users can view this page
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php?error=not_logged_in");
-    exit();
-}
+$current_id;
 $profile_salutation;
 $profile_firstname;
 $profile_lastname;
 $profile_email;
 $profile_username;
 $current_password;
+$role;
+$status;
 
-require_once'form/dbaccess.php';
+require_once('form/dbaccess.php');
 $db_obj = new mysqli($host, $user, $dbpassword, $database);
 
 if ($db_obj->connect_error) {
     echo "Connection Error: " . $db_obj -> connect_error;
     exit();
 }else{
-    $sql = "SELECT * FROM users";
+    $current_id = $_GET['id'];
+    $sql = "SELECT * FROM users WHERE id = '$current_id'";
     $result = $db_obj -> query($sql);
     $user_found = false;
 
     while ($row = $result->fetch_array()) { 
-
-        if ($row['username'] === $_SESSION['username']) {
-            $profile_salutation = $row['salutation'];
-            $profile_firstname = $row['firstname'];
-            $profile_lastname = $row['lastname'];
-            $profile_email = $row['useremail'];
-            $profile_username = $row['username'];
-            $current_password = $row['password'];
-            break;
-        }
+        
+        $profile_salutation = $row['salutation'];
+        $profile_firstname = $row['firstname'];
+        $profile_lastname = $row['lastname'];
+        $profile_email = $row['useremail'];
+        $profile_username = $row['username'];
+        $current_password = $row['password'];
+        $role = $row['role'];
+        $status = $row['status'];
+        break;
+    
     }
 }
 
@@ -50,39 +50,32 @@ $profile_form_data = $_SESSION['profile_form_data'] ?? [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Edit User</title>
     <!-- Bootstrap CSS -->
     <?php include('link.php'); ?>
 </head>
 <body>
 <?php include('header.php'); 
 if ( isset($_GET['update']) && $_GET['update'] == 'success') {
-    echo "<div class='alert alert-success mt-3' role='alert'>Registration was successful.</div>";
-    unset($_SESSION['registration_success']);
+    echo "<div class='alert alert-success mt-3' role='alert'>Update was successful.</div>";
 }
 ?>
 
 
 <div class="container mt-5">
-    <h2>Profile</h2>
-    <p>Welcome, <strong><?= htmlspecialchars($profile_username); ?></strong>!</p>
+    <h2>User</h2>
+    <p><strong><?= htmlspecialchars($current_id); ?></strong></p>
 
     <!-- Display error messages -->
     <?php
     if (isset($_GET['error'])) {
         $error_message = '';
         switch ($_GET['error']) {
-            case 'wrong_password':
-                $error_message = 'Incorrect current password. Please try again.';
-                break;
             case 'invalid_password':
                 $error_message = 'New password must be at least 8 characters long, include at least one number, and one special character.';
                 break;
             case 'invalid_email':
                 $error_message = 'Please enter a valid email address.';
-                break;
-            case 'user_not_found':
-                $error_message = 'User not found.';
                 break;
             case 'user_exists':
                 $error_message = 'Username already exists.';
@@ -95,7 +88,8 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
     ?>
 
     <!-- Profile Details -->
-    <form action="profile_update.php" method="POST">
+    <form action="form/edit-user-form.php?id=<?php echo htmlspecialchars($current_id); ?>" method="POST">
+        
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username"
@@ -124,15 +118,24 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
             <input type="email" class="form-control" id="email" name="email"
                    value="<?php echo htmlspecialchars($profile_email); ?>" required>
         </div>
+
         <div class="mb-3">
-            <label for="current_password" class="form-label">Current Password</label>
-            <input type="password" class="form-control" id="current_password" name="current_password" required>
+            <label for="role" class="form-label">Role</label>
+            <input type="role" class="form-control" id="role" name="role"
+                   value="<?php echo htmlspecialchars($role); ?>" required>
         </div>
+
         <div class="mb-3">
-            <label for="new_password" class="form-label">New Password (optional)</label>
+            <label for="status" class="form-label">Status</label>
+            <input type="status" class="form-control" id="status" name="status"
+                   value="<?php echo htmlspecialchars($status); ?>" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="new_password" class="form-label">New Password (if necessary)</label>
             <input type="password" class="form-control" id="new_password" name="new_password">
         </div>
-        <button type="submit" class="btn btn-primary">Update Profile</button>
+        <button type="submit" class="btn btn-primary">Update user data</button>
     </form>
 </div>
 

@@ -368,4 +368,27 @@ footer a:hover {
     .carousel-control-next {
         width: 10%; /* Erhöht die Breite der Navigationsflächen auf kleineren Bildschirmen */
     }
+    .card {
+        border: 1px solid #ddd; /* Leichte Umrandung */
+        border-radius: 5px; /* Abgerundete Ecken */
+    }
+    
+    .card-img-top {
+        height: 200px; /* Feste Höhe für das Bild */
+        object-fit: cover; /* Bild skalieren, ohne Verzerrung */
+    }
+    
+    .card-title {
+        font-weight: bold; /* Fettschrift für den Titel */
+        color: #007bff; /* Optionale Farbe */
+    }
+    
+    .card-footer {
+        background-color: #f8f9fa; /* Heller Hintergrund für den Footer */
+    }
+    
+    
+    
+    
+    
 }

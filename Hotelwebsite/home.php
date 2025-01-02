@@ -2,22 +2,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-
-if (isset($_GET['registration_success']) && $_GET['registration_success']) {
-    echo "<div class='alert alert-success mt-3' role='alert'>Registration was successful.</div>";
-    unset($_SESSION['registration_success']);
-}
-if (isset($_GET['reservation_success']) && $_GET['reservation_success'] == '1') {
-    echo "<div class='alert alert-success mt-3' role='alert'>Reservation was successful.</div>";
-}
-
-
-if (isset($_GET['login_success']) && $_GET['login_success']) {
-    echo "<div class='alert alert-success mt-3' role='alert'>Login was successful.</div>";
-    
-}
 ?>
+
 
 <!-- Restlicher Inhalt von home.php -->
 <!DOCTYPE html>
@@ -26,11 +12,24 @@ if (isset($_GET['login_success']) && $_GET['login_success']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GD Hotel - Startseite</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="css-stylesheet-bootstrap.css">
+    <?php include('link.php'); ?>
 </head>
 <body class="home-background">
-    <?php include('header.php'); ?>
+    <?php include('header.php');
+    if (isset($_GET['registration_success']) && $_GET['registration_success']) {
+        echo "<div class='alert alert-success mt-3' role='alert'>Registration was successful.</div>";
+        unset($_SESSION['registration_success']);
+    }
+    if (isset($_GET['reservation_success']) && $_GET['reservation_success'] == '1') {
+        echo "<div class='alert alert-success mt-3' role='alert'>Reservation was successful.</div>";
+    }
+    
+    
+    if (isset($_GET['login_success']) && $_GET['login_success']) {
+        echo "<div class='alert alert-success mt-3' role='alert'>Login was successful.</div>";
+    }
+
+    ?>
 
     <div class="container">
         <div class="jumbotron text-center">
@@ -84,7 +83,8 @@ if (isset($_GET['login_success']) && $_GET['login_success']) {
         </div>
 
     <?php include('footer.php'); ?>
+    <?php include('script.php'); ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   
 </body>
 </html>

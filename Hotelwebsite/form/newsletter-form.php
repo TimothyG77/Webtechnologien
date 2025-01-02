@@ -2,60 +2,86 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-// Start the session
+$_SESSION['newsletter_form_data'] = [
+    'title' => $_POST['title'] ?? '',
+    'subject' => $_POST['subject'] ?? '',
+    'content' => $_POST['content'] ?? ''
+];
+require_once('dbaccess.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = [];
-
-    // Retrieve and trim inputs
-    $title = trim($_POST['title'] ?? '');
-    $subject = trim($_POST['subject'] ?? '');
-    $content = trim($_POST['content'] ?? '');
-
-    // Store form data in session
-    $_SESSION['newsletter_form_data'] = [
-        'title' => $title,
-        'subject' => $subject,
-        'content' => $content,
-    ];
-
-    // Validation
-    if (empty($title)) {
-        $errors[] = "Der Titel darf nicht leer sein.";
-    } elseif (strlen($title) > 50) {
-        $errors[] = "Der Titel darf maximal 50 Zeichen lang sein.";
-    }
-
-    if (empty($subject)) {
-        $errors[] = "Der Betreff darf nicht leer sein.";
-    } elseif (strlen($subject) > 100) {
-        $errors[] = "Der Betreff darf maximal 100 Zeichen lang sein.";
-    }
-
-    if (empty($content)) {
-        $errors[] = "Der Inhalt darf nicht leer sein.";
-    }
-
-    // If errors exist, display the form again with the error messages
-    if (!empty($errors)) {
-        echo '<div class="container mt-3">';
-        echo '<div class="alert alert-danger" role="alert">';
-        echo '<ul>';
-        foreach ($errors as $error) {
-            echo "<li>" . htmlspecialchars($error) . "</li>";
+$db_obj = new mysqli($host, $user, $dbpassword, $database);
+if ($db_obj->connect_error) {
+    echo "Connection Error: " . $db_obj->connect_error;
+    exit();
+}else{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $file = $_FILES['picture'];
+        $fileName = $file['name'];
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+    
+        if ($file['error'] === UPLOAD_ERR_NO_FILE) {
+            header("Location: ../createNewsletter.php?error=no_file_selected");
+        
+            exit;
+        }elseif($fileExtension != "png"){
+            header("Location: ../createNewsletter.php?error=png_error");
+            exit();
+        }else{
+            if (!is_dir('uploads')) {
+                mkdir('uploads');
+            }
+            move_uploaded_file(
+                $file['tmp_name'], 
+                'uploads/'.$fileName
+            );
+            $picture = 'form/uploads/'.$fileName;
         }
-        echo '</ul>';
-        echo '</div>';
-        include '../createNewsletter.php'; // Show the form again
-        echo '</div>';
+    
+    
+    
+        // Retrieve and trim inputs
+        $title = trim($_POST['title'] ?? '');
+        $content = trim($_POST['content'] ?? '');
+    
+        // Store form data in session
+        $_SESSION['newsletter_form_data'] = [
+            'title' => $title,
+            'content' => $content,
+        ];
+    
+        // Validation
+        if (empty($title)) {
+            header("Location: ../createNewsletter.php?error=empty_title");
+            exit();
+        } elseif (strlen($title) > 50) {
+            header("Location: ../createNewsletter.php?error=title_too_long");
+            exit();
+        }
+    
+    
+        if (empty($content)) {
+            header("Location: ../createNewsletter.php?error=empty_content");
+            exit();
+        }
+    
+        
+            $date = new DateTime();
+            $date = $date->format('Y-m-d');
+            $sql = "INSERT INTO `newsletter` (`title`, `picture`, `content`, `date`) VALUES (?, ?, ?, ?); " ;
+            $stmt = $db_obj->prepare($sql);
+            $stmt->bind_param("ssss", $title, $picture, $content, $date);
+            
+            $stmt->execute();
+    
+            unset($_SESSION['newsletter_form_data']);
+            header("Location: ../newsletter.php?success=1");
+            exit(); // IMPORTANT: Terminate the current script
+        
     } else {
-        // Data validated successfully, clear session data and redirect
-        unset($_SESSION['newsletter_form_data']);
-        header("Location: ../newsletter.php?success=1");
-        exit(); // IMPORTANT: Terminate the current script
+        // If the page is accessed directly, show only the form
+        include '../createNewsletter.php';
     }
-} else {
-    // If the page is accessed directly, show only the form
-    include '../createNewsletter.php';
 }
+
+
 ?>

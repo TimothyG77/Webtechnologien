@@ -36,17 +36,25 @@ if (session_status() == PHP_SESSION_NONE) {
                     
                     <?php if (isset($_SESSION['username'])): ?>
                         <!-- Eingeloggter Benutzer -->
-                        <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/profile.php">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/logout.php">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" href="reservation.php">Reservation</a></li>
+                        <?php if (isset($_SESSION['username']) && $_SESSION['role'] === 'admin'): ?>
+                            <li class="nav-item"><a class="nav-link" href="user-overview.php">User-Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="reservations-overview-admin.php">Reservation-Overview</a></li>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['username']) && $_SESSION['role'] === 'user'): ?>
+                            <li class="nav-item"><a class="nav-link" href="user-reservations.php">My Reservations</a></li>
+                        <?php endif; ?>
+                        
                     <?php else: ?>
                         <!-- Nicht eingeloggt -->
-                        <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/register.php">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/login.php">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
                     <?php endif; ?>
-                    <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/hilfe.php">Help/FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/newsletter.php">Newsletter</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/impressum.php">Imprint</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/Webtechnologien/Hotelwebsite/reservation.php">Reservation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="hilfe.php">Help/FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="newsletter.php">Newsletter</a></li>
+                    <li class="nav-item"><a class="nav-link" href="impressum.php">Imprint</a></li>
                 </ul>
             </div>
         </div>

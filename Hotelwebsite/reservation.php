@@ -12,8 +12,7 @@ $reservation_form_data = $_SESSION['reservation_form_data'] ?? []; // Retrieve t
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Reservations</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css-stylesheet-bootstrap.css?v=<?php echo time(); ?>">
+    <?php include('link.php'); ?>
 </head>
 <body class="reservation-background">
 <?php include('header.php'); ?>
@@ -28,6 +27,11 @@ $reservation_form_data = $_SESSION['reservation_form_data'] ?? []; // Retrieve t
     if (isset($_GET['error']) && $_GET['error'] == 'checkin_checkout') {
         echo '<div class="alert alert-danger" role="alert">';
         echo 'Check-out date must be later than check-in date.';
+        echo '</div>';
+    }
+    if (isset($_GET['error']) && $_GET['error'] == 'availability') {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo 'No Room available in selected time period';
         echo '</div>';
     }
     ?>
@@ -78,6 +82,6 @@ $reservation_form_data = $_SESSION['reservation_form_data'] ?? []; // Retrieve t
 </div>
 
 <?php include('footer.php'); ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<?php include('script.php'); ?>
 </body>
 </html>
