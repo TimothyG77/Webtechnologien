@@ -4,7 +4,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 $_SESSION['newsletter_form_data'] = [
     'title' => $_POST['title'] ?? '',
-    'subject' => $_POST['subject'] ?? '',
     'content' => $_POST['content'] ?? ''
 ];
 require_once('dbaccess.php');
@@ -21,20 +20,49 @@ if ($db_obj->connect_error) {
     
         if ($file['error'] === UPLOAD_ERR_NO_FILE) {
             header("Location: ../createNewsletter.php?error=no_file_selected");
-        
             exit;
-        }elseif($fileExtension != "png"){
+        }elseif($fileExtension != "png" && $fileExtension != 'jpg' && $fileExtension != 'jpeg'){
             header("Location: ../createNewsletter.php?error=png_error");
             exit();
         }else{
             if (!is_dir('uploads')) {
                 mkdir('uploads');
             }
-            move_uploaded_file(
-                $file['tmp_name'], 
-                'uploads/'.$fileName
+            list($width, $height) = getimagesize($file['tmp_name']);
+            $new_width = 1000; 
+            $new_height = 800;
+            $thumbnail = imagecreatetruecolor($new_width, $new_height);
+            imageantialias($thumbnail, true); //erhöht die Qualität
+            
+            if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
+                $source_image = imagecreatefromjpeg($file['tmp_name']);
+            } elseif ($fileExtension === 'png') {
+                $source_image = imagecreatefrompng($file['tmp_name']);
+            }
+    
+            // Bild resampeln (Verkleinern)
+            imagecopyresampled(
+                $thumbnail,
+                $source_image,
+                0, 0, 0, 0,
+                $new_width, $new_height,
+                $width, $height
             );
-            $picture = 'form/uploads/'.$fileName;
+    
+            // Thumbnail speichern (an den endgültigen Pfad)
+            $thumbnail_path = 'uploads/' . $fileName;
+            if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
+                imagejpeg($thumbnail, $thumbnail_path, 95); // JPEG speichern mit 80% Qualität
+            } elseif ($fileExtension === 'png') {
+                imagepng($thumbnail, $thumbnail_path);
+            }
+    
+            // Speicher freigeben
+            imagedestroy($thumbnail);
+            imagedestroy($source_image);
+    
+            // Bildpfad für die Datenbank
+            $picture = 'form/'.$thumbnail_path;
         }
     
     

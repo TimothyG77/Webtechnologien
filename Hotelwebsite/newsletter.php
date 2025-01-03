@@ -38,7 +38,7 @@ $result = $db_obj -> query($sql);
         while($row = $result->fetch_array()) {
             echo '<div class="col-md-4 mb-4">'; // Jede Box nimmt 1/3 der Breite in großen Viewports ein
             echo '<div class="card h-100 shadow">'; // Bootstrap Card mit Schatten
-            echo '<img src="' . htmlspecialchars($row["picture"]) . '" class="img-thumbnail" style="width: 400px; height: 150px; object-fit: cover; alt="Newsletter Image">'; // Bild mit Thumbnail-Größe
+            echo '<img src="' . htmlspecialchars($row["picture"]) . '" class="img-thumbnail"  >'; // Bild mit Thumbnail-Größe
             echo '<div class="card-body">'; // Card-Inhalt
             echo '<h5 class="card-title">' . htmlspecialchars($row["title"]) . '</h5>'; // Titel
             echo '<p class="card-text">' . htmlspecialchars($row["content"]) . '</p>'; // Inhalt
