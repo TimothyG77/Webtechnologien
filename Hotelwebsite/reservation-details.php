@@ -27,6 +27,7 @@ if ($db_obj->connect_error) {
         $user_id = $row['user_id'];
         $creation_date = $row['creation_date'];
         $status = $row['status'];
+        $price = $row['price'];
         break;
     
     }
@@ -104,13 +105,19 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
         </div>
 
         <div class="mb-3">
-            <label for="status" class="form-label">Breakfast</label>
+            <label for="status" class="form-label">Status</label>
             <select id="status" name="status" class="form-control">
                 <option value="new" <?php if ($status == 'new') echo 'selected'; ?>>new</option>
                 <option value="confirmed" <?php if ($status == 'confirmed') echo 'selected'; ?>>confirmed</option>
                 <option value="cancelled" <?php if ($status == 'cancelled') echo 'selected'; ?>>canceled</option>
                 
             </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="price" class="form-control" id="price" name="price"
+                   value="<?php echo htmlspecialchars($price).'€'; ?>" >
         </div>
         <button type="submit" class="btn btn-primary">Update reservation data</button>
     </form>

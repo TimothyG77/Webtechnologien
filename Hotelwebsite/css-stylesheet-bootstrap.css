@@ -287,7 +287,6 @@ footer a:hover {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
-    padding: 20px;
     color: #ffffff;
 }
 
@@ -315,17 +314,20 @@ footer a:hover {
     min-height: 100vh;
 }
 
+
 .imprint-box {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
+    
 
 .imprint-box:hover {
     transform: scale(1.02);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
+    
 
 .imprint-background {
     background-image: url('images/GD-Hotel-Lobby.webp');
@@ -333,8 +335,9 @@ footer a:hover {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
-    padding: 30px;
+    
 }
+
 
 
 
@@ -363,6 +366,7 @@ footer a:hover {
         max-width: 100%; /* Passt die Breite auf kleinen Bildschirmen an */
 
     }
+    
 
     .carousel-control-prev,
     .carousel-control-next {

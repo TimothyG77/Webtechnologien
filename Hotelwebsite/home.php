@@ -33,7 +33,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <div class="container">
         <div class="jumbotron text-center">
-            <h1 class="introduction-display">Welcome to GD Hotel</h1>
+            <h1 class="introduction-display">Welcome to GD Hotel <?php if(isset($_SESSION['username'])){echo ', '.$_SESSION['username'];} ?></h1>
             <p class="introduction-lead-text">Your luxury stay in Vienna awaits you!</p>
         </div>
     </div>

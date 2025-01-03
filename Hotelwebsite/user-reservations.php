@@ -60,6 +60,7 @@ $result = $db_obj->query($sql);
                 <th>Pets</th>
                 <th>Creation date</th>
                 <th>Status</th>
+                <th>Price</th>
                 
 
             </tr>
@@ -76,6 +77,7 @@ $result = $db_obj->query($sql);
                 echo '<td>' . htmlspecialchars($row['Pets']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['creation_date']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['status']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['price']) .'€'. '</td>';
                 echo '</tr>';
             }
         } else {

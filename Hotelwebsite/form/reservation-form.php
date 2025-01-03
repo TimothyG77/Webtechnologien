@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $pets = trim($_POST['pets'] ?? '');
     $creation_date = new DateTime();
-    $creation_date = $creation_date->format('Y-m-d');
+    $creation_date = $creation_date->format('Y-m-d H:i:s');
     $status = 'new';
 
     //calculating days

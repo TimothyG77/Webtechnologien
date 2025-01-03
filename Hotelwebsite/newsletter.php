@@ -58,8 +58,8 @@ $result = $db_obj -> query($sql);
 
         
         <?php
-        
-        $sql_select_role = 'SELECT role FROM users WHERE username = "'.$_SESSION['username'].'"';
+        if (isset($_SESSION['username'])){
+            $sql_select_role = 'SELECT role FROM users WHERE username = "'.$_SESSION['username'].'"';
         $result_role = $db_obj->query($sql_select_role);
         
         while($row = $result_role -> fetch_array()){
@@ -68,6 +68,8 @@ $result = $db_obj -> query($sql);
                 echo '<div class="mb-2"> <a href="newsletter-overview.php" class="btn btn-primary">Newsletter-Overview</a> </div>';
             }
         }
+        }
+        
         
 
         
