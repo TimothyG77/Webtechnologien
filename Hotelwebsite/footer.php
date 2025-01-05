@@ -2,7 +2,7 @@
     <div class="container">
         <p class="mb-2">&copy; 2024 GD Hotel GmbH</p>
         <ul class="list-inline mb-0">
-            <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/home.php" class="footer-link">Home</a></li>
+            <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/index.php" class="footer-link">Home</a></li>
             <li class="list-inline-item"><span class="separator">|</span></li>
             <li class="list-inline-item"><a href="/Webtechnologien/Hotelwebsite/hilfe.php" class="footer-link">Help/FAQ</a></li>
             <li class="list-inline-item"><span class="separator">|</span></li>
