@@ -67,7 +67,7 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
     <h2>Profile</h2>
     <p>Welcome, <strong><?= htmlspecialchars($profile_username); ?></strong>!</p>
 
-    <!-- Display error messages -->
+    <!-- error messages -->
     <?php
     if (isset($_GET['error'])) {
         $error_message = '';
@@ -94,7 +94,7 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
     }
     ?>
 
-    <!-- Profile Details -->
+    
     <form action="profile_update.php" method="POST">
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>

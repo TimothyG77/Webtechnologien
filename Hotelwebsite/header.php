@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <header class="bg-primary text-white text-center p-4">
     <div class="d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-            <a href="/Webtechnologien/Hotelwebsite/home.php" class="icon-link" title="GD Hotel Home">
+            <a href="/Webtechnologien/Hotelwebsite/index.php" class="icon-link" title="GD Hotel Home">
                 <img src="images/Home-Button-Icon.jpg" alt="GD Logo" class="icon-img">
             </a>
             <h1 class="mb-0">GD Hotel</h1>

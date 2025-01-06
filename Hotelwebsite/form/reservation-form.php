@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Clear session form data upon success
     unset($_SESSION['reservation_form_data']);
-    header("Location: ../home.php?reservation_success=1");
+    header("Location: ../index.php?reservation_success=1");
     exit();
 }
 ?>

@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Check the result of the verification
         if ($user_found) {
             unset($_SESSION['login_username']);
-            header("Location: ../home.php?login_success=1");
+            header("Location: ../index.php?login_success=1");
             exit();
         } else {
             // Error, invalid login credentials

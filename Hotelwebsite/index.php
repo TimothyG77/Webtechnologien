@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 ?>
 
 
-<!-- Restlicher Inhalt von home.php -->
+
 <!DOCTYPE html>
 <html lang="de">
 <head>

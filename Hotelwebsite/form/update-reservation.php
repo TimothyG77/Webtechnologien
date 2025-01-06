@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     }else{
         // Direct access is not allowed
-        header("Location: home.php");
+        header("Location: index.php");
         exit();
     }
 

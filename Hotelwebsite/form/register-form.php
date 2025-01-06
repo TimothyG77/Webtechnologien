@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         unset($_SESSION['form_data']);
 
         // Redirect on success
-        header("Location: ../home.php?registration_success=1");
+        header("Location: ../index.php?registration_success=1");
         exit();
         }    
 }
