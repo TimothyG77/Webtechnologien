@@ -35,7 +35,7 @@ $login_username = $_SESSION['login_username'] ?? ''; // Retrieve the stored user
         <h2 class="form-title-login">Login</h2>
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($_SESSION['login_username']); ?>" required>
+            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($_SESSION['login_username'] ?? ''); ?>" required>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
