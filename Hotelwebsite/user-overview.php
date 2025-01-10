@@ -1,4 +1,12 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: index.php");
+    exit();
+}
+
 require_once('form/dbaccess.php');
 
 // Verbindung zur Datenbank herstellen
@@ -9,7 +17,8 @@ if ($db_obj->connect_error) {
 }
 
 // Alle Benutzer abrufen
-$sql = "SELECT * FROM users";
+$sql = "SELECT * FROM users;
+";
 $result = $db_obj->query($sql);
 ?>
 

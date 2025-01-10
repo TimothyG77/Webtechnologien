@@ -1,6 +1,13 @@
 <?php
-require_once('form/dbaccess.php');
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: index.php");
+    exit();
+}
+require_once('form/dbaccess.php');
 // Verbindung zur Datenbank herstellen
 $db_obj = new mysqli($host, $user, $dbpassword, $database);
 

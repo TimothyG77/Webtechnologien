@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: index.php");
+    exit();
+}
 require_once('form/dbaccess.php');
 
 // Verbindung zur Datenbank herstellen

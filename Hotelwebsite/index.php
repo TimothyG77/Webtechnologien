@@ -25,10 +25,9 @@ if (session_status() == PHP_SESSION_NONE) {
     }
     
     
-    if (isset($_GET['login_success']) && $_GET['login_success']) {
+    if (isset($_GET['login_success'])) {
         echo "<div class='alert alert-success mt-3' role='alert'>Login was successful.</div>";
     }
-
     ?>
 
     <div class="container">

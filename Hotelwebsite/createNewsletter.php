@@ -2,6 +2,10 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: index.php");
+    exit();
+}
 
 // Newsletter-Daten aus der Session laden
 $newsletter_form_data = $_SESSION['newsletter_form_data'] ?? [];

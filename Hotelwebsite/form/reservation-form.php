@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->get_result();
 
     //We assume, that our hotel has 500 rooms in total
-    if ($result->num_rows > 499) {
+    if ($result->num_rows > 2) {
         header("Location: ../reservation.php?error=availability");
         exit();
     }
