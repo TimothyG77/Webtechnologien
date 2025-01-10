@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // Store the username in the session in case of an error
-    $_SESSION['login_username'] = $username;
+    $_SESSION['login_username'] = $login_username;
 
     require_once'dbaccess.php';
     $db_obj = new mysqli($host, $user, $dbpassword, $database);
