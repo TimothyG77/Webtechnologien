@@ -7,10 +7,8 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// Newsletter-Daten aus der Session laden
+// safed session data
 $newsletter_form_data = $_SESSION['newsletter_form_data'] ?? [];
-
-
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -24,14 +22,15 @@ $newsletter_form_data = $_SESSION['newsletter_form_data'] ?? [];
 <body>
 <?php include('header.php');?>
 <?php
+//catch error from newsletter-upload with $_GET
 if(isset($_GET['error'])){
     $error_message = '';
     switch($_GET['error']){
         case 'no_file_selected':
             $error_message = 'Please select a file';
             break;
-        case 'png_error':
-            $error_message = 'Only png-files are allowed!';
+        case 'file_type_error':
+            $error_message = 'Only png-, jpg- and jpeg-files are allowed!';
             break;
         case 'empty_title':
             $error_message = 'Please enter a title';
@@ -49,9 +48,9 @@ if(isset($_GET['error'])){
 <div class="container mt-5">
     <h1 class="text-center mb-4">Create newsletter</h1>
 
-    <!-- Newsletter-Formular -->
+    <!-- newsletterform -->
     <form action="/Webtechnologien/Hotelwebsite/form/newsletter-form.php" method="post" enctype="multipart/form-data" class="mt-4">
-        <!-- Titel des Newsletters -->
+        <!-- title -->
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" 
@@ -64,7 +63,7 @@ if(isset($_GET['error'])){
 
     
 
-        <!-- Inhalt -->
+        <!-- content -->
         <div class="mb-3">
             <label for="content" class="form-label">Content</label>
             <textarea class="form-control" 
@@ -74,13 +73,13 @@ if(isset($_GET['error'])){
                       required><?php echo htmlspecialchars($newsletter_form_data['content'] ?? '', ENT_QUOTES); ?></textarea>
         </div>
         
-        
+        <!-- picture upload -->
         <div class="mb-3">
             <label for="picture" class="form-label">Upload picture</label>
             <input type="file" class="form-control" id="picture" name="picture">
         </div>
 
-        <!-- Abschicken Button -->
+        <!-- submit button -->
         <button type="submit" class="btn btn-primary">create newsletter</button>
 
         

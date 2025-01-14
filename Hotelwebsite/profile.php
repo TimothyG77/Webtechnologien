@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Access restriction: Only logged-in users can view this page
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php?error=not_logged_in");
+    header("Location: index.php");
     exit();
 }
 $profile_salutation;
@@ -51,8 +51,6 @@ $profile_form_data = $_SESSION['profile_form_data'] ?? [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body>
 <?php include('header.php'); 
@@ -137,6 +135,5 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
 </div>
 
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-    session_start(); // Start the session only if it hasn't been started already
+    session_start(); 
 }
 
-$reservation_form_data = $_SESSION['reservation_form_data'] ?? []; // Retrieve the stored form data if available
+$reservation_form_data = $_SESSION['reservation_form_data'] ?? []; //save reservation data in case of error
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +11,6 @@ $reservation_form_data = $_SESSION['reservation_form_data'] ?? []; // Retrieve t
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Reservations</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body class="reservation-background">
 <?php include('header.php'); ?>
@@ -82,6 +80,5 @@ $reservation_form_data = $_SESSION['reservation_form_data'] ?? []; // Retrieve t
 </div>
 
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

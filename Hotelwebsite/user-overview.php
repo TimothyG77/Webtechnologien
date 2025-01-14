@@ -8,8 +8,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 }
 
 require_once('form/dbaccess.php');
-
-// Verbindung zur Datenbank herstellen
 $db_obj = new mysqli($host, $user, $dbpassword, $database);
 
 if ($db_obj->connect_error) {
@@ -28,17 +26,16 @@ $result = $db_obj->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User-Overview</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body>
 <?php include('header.php'); ?>
 
-<div class="container mt-5">
+<div class="container mt-5 ">
     <div class="p-4 border rounded bg-light mb-4">
         <h1>All Users</h1>
     </div>
 
+    <div class = "d-flex justify-content-center">
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
@@ -48,7 +45,6 @@ $result = $db_obj->query($sql);
                 <th>Lastname</th>
                 <th>Email</th>
                 <th>Username</th>
-                <th>Password</th>
                 <th>Role</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -66,7 +62,6 @@ $result = $db_obj->query($sql);
                 echo '<td>' . htmlspecialchars($row['lastname']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['useremail']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['username']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['password']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['role']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['status']) . '</td>';
                 echo '<td>';
@@ -83,9 +78,11 @@ $result = $db_obj->query($sql);
         ?>
         </tbody>
     </table>
+    </div>
+
+    
 </div>
 
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

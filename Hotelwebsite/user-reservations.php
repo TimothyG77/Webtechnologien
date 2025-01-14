@@ -8,15 +8,14 @@ if (!isset($_SESSION['role']) ) {
 }
 require_once('form/dbaccess.php');
 
-// Verbindung zur Datenbank herstellen
+
 $db_obj = new mysqli($host, $user, $dbpassword, $database);
 
 if ($db_obj->connect_error) {
     die("Connection failed: " . $db_obj->connect_error);
 }
-$current_user = $_SESSION['username'];
 
-
+//if user enters site, user id is in $_SESSION, if admin enters site, user id is in $_GET['id] from user-overview.php 
 if($_SESSION['role'] === 'admin'){
     $user_id = $_GET['id'];
     $sql = "
@@ -43,8 +42,6 @@ $result = $db_obj->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations-Overview</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body>
 <?php include('header.php'); ?>
@@ -93,6 +90,5 @@ $result = $db_obj->query($sql);
 </div>
 
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

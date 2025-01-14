@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
- // Start the session
+ 
 $login_username = $_SESSION['login_username'] ?? ''; // Retrieve the stored username if available
 ?>
 <!DOCTYPE html>
@@ -11,8 +11,6 @@ $login_username = $_SESSION['login_username'] ?? ''; // Retrieve the stored user
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>                       
 <body class="login-background">
 <?php include('header.php'); ?>
@@ -45,6 +43,5 @@ $login_username = $_SESSION['login_username'] ?? ''; // Retrieve the stored user
     </form>
 </div>
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

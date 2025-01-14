@@ -17,7 +17,6 @@ $result = $db_obj -> query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newsletter</title>
     <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body class="newsletter-background">
 <?php include('header.php'); ?>
@@ -36,18 +35,18 @@ $result = $db_obj -> query($sql);
     <?php
     if ($result->num_rows > 0) {
         while($row = $result->fetch_array()) {
-            echo '<div class="col-md-4 mb-4">'; // Jede Box nimmt 1/3 der Breite in großen Viewports ein
-            echo '<div class="card h-100 shadow">'; // Bootstrap Card mit Schatten
-            echo '<img src="' . htmlspecialchars($row["picture"]) . '" class="img-thumbnail" alt="Tumbnail" >'; // Bild mit Thumbnail-Größe
-            echo '<div class="card-body">'; // Card-Inhalt
-            echo '<h5 class="card-title">' . htmlspecialchars($row["title"]) . '</h5>'; // Titel
-            echo '<p class="card-text">' . htmlspecialchars($row["content"]) . '</p>'; // Inhalt
+            echo '<div class="col-md-4 mb-4">'; // every box takes 1/3 of the remaining website
+            echo '<div class="card h-100 shadow">'; // Bootstrap Card with shadow
+            echo '<img src="' . htmlspecialchars($row["picture"]) . '" class="img-thumbnail" alt="Tumbnail" >'; // link to the picture
+            echo '<div class="card-body">'; // card context
+            echo '<h5 class="card-title">' . htmlspecialchars($row["title"]) . '</h5>'; // title
+            echo '<p class="card-text">' . htmlspecialchars($row["content"]) . '</p>'; // context
             echo '</div>';
-            echo '<div class="card-footer text-muted">'; // Veröffentlichungsdatum im Footer
+            echo '<div class="card-footer text-muted">'; // date
             echo 'Veröffentlicht am: ' . htmlspecialchars($row["date"]);
             echo '</div>';
-            echo '</div>'; // Card schließen
-            echo '</div>'; // Spalte schließen
+            echo '</div>'; 
+            echo '</div>'; 
         }
     } else {
         echo '<p>No newsletters available.</p>';
@@ -58,21 +57,10 @@ $result = $db_obj -> query($sql);
 
         
         <?php
-        if (isset($_SESSION['username'])){
-            $sql_select_role = 'SELECT role FROM users WHERE username = "'.$_SESSION['username'].'"';
-        $result_role = $db_obj->query($sql_select_role);
-        
-        while($row = $result_role -> fetch_array()){
-            if ($row['role'] === 'admin'){
-                echo '<div class="mb-2"> <a href="createNewsletter.php" class="btn btn-primary">Newsletter erstellen</a> </div>';
-                echo '<div class="mb-2"> <a href="newsletter-overview.php" class="btn btn-primary">Newsletter-Overview</a> </div>';
-            }
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'){
+            echo '<div class="mb-2"> <a href="createNewsletter.php" class="btn btn-primary">Newsletter erstellen</a> </div>';
+            echo '<div class="mb-2"> <a href="newsletter-overview.php" class="btn btn-primary">Newsletter-Overview</a> </div>';
         }
-        }
-        
-        
-
-        
         ?>
         
         
@@ -81,6 +69,5 @@ $result = $db_obj -> query($sql);
     
     
     <?php include('footer.php'); ?>
-    <?php include('script.php'); ?>
 </body>
 </html>

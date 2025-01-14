@@ -1,4 +1,7 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: index.php");
     exit();
@@ -12,7 +15,7 @@ if ($db_obj->connect_error) {
     die("Connection failed: " . $db_obj->connect_error);
 }
 
-// Falls ein Newsletter gelöscht werden soll
+// if newsletter gets deleted by clicking the delete button
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_newsletter'])) {
     $news_id = intval($_POST['delete_newsletter']);
 
@@ -27,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_newsletter']))
     }
 }
 
-// Alle Newsletter abrufen
+// select all newsletters from db
 $sql = "SELECT * FROM newsletter";
 $result = $db_obj->query($sql);
 ?>
@@ -38,8 +41,6 @@ $result = $db_obj->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newsletter-Overview</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body class="newsletter-background">
 <?php include('header.php'); ?>
@@ -55,6 +56,7 @@ $result = $db_obj->query($sql);
         </div>
     <?php endif; ?>
 
+    <!-- displays error- or successmessage if admin deletes newsletter -->
     <?php if (isset($error_message)): ?>
         <div class="alert alert-danger" role="alert">
             <?php echo $error_message; ?>
@@ -73,8 +75,9 @@ $result = $db_obj->query($sql);
             </tr>
         </thead>
         <tbody>
+            <!-- displays all newsletter in table -->
             <?php if ($result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
+                <?php while ($row = $result->fetch_array()): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($row['news_id']); ?></td>
                         <td><?php echo htmlspecialchars($row['title']); ?></td>
@@ -85,6 +88,7 @@ $result = $db_obj->query($sql);
                         <td><?php echo htmlspecialchars($row['date']); ?></td>
                         <td>
                             <form method="POST" action="">
+                                <!-- puts the id in POST-Request to identify which newsletter gets deleted -->
                                 <button type="submit" name="delete_newsletter" value="<?php echo $row['news_id']; ?>" class="btn btn-danger btn-sm">Löschen</button>
                             </form>
                         </td>
@@ -100,6 +104,5 @@ $result = $db_obj->query($sql);
 </div>
 
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

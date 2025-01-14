@@ -3,6 +3,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start(); 
 }
 ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="css-stylesheet-bootstrap.css">
 
 
 <header class="bg-primary text-white text-center p-4">
@@ -17,11 +19,8 @@ if (session_status() == PHP_SESSION_NONE) {
             <a href="https://www.instagram.com/accounts/login/" target="_blank" class="icon-link mx-3" title="Instagram">
                 <img src="images/Instagram Icon.webp" alt="Instagram" class="icon-img">
             </a>
-            <a href="https://www.instagram.com/accounts/login/" target="_blank" class="icon-link mx-3" title="Facebook">
+            <a href="https://www.facebook.com" target="_blank" class="icon-link mx-3" title="Facebook">
                 <img src="images/Facebook-Logo.png" alt="Facebook" class="icon-img">
-            </a>
-            <a href="/Webtechnologien/Hotelwebsite/impressum.php" class="icon-link mx-3" title="Impressum">
-                <img src="images/Email Icon.png" alt="Mail" class="icon-img">
             </a>
         </div>
     </div>
@@ -35,11 +34,12 @@ if (session_status() == PHP_SESSION_NONE) {
                 <ul class="navbar-nav">
                     
                     <?php if (isset($_SESSION['username'])): ?>
-                        <!-- Eingeloggter Benutzer -->
+                        <!-- logged in user -->
                         <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
                         <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
                         <li class="nav-item"><a class="nav-link" href="reservation.php">Reservation</a></li>
                         <?php if (isset($_SESSION['username']) && $_SESSION['role'] === 'admin'): ?>
+                            <!-- logged in admin -->
                             <li class="nav-item"><a class="nav-link" href="user-overview.php">User-Overview</a></li>
                             <li class="nav-item"><a class="nav-link" href="reservations-overview-admin.php">Reservation-Overview</a></li>
                         <?php endif; ?>
@@ -48,7 +48,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <?php endif; ?>
                         
                     <?php else: ?>
-                        <!-- Nicht eingeloggt -->
+                        <!-- not logged in -->
                         <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
                         <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
                     <?php endif; ?>

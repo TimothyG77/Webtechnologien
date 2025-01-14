@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imprint</title>
-    <?php include('link.php'); ?>
 </head>
 <body class="imprint-background">
 <?php include('header.php'); ?>
@@ -63,5 +62,4 @@
     </main>
     
     <?php include('footer.php'); ?></body>
-    <?php include('script.php'); ?>
 </html>

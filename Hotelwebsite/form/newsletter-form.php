@@ -2,6 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+//save data in case of an error
 $_SESSION['newsletter_form_data'] = [
     'title' => $_POST['title'] ?? '',
     'content' => $_POST['content'] ?? ''
@@ -22,7 +23,7 @@ if ($db_obj->connect_error) {
             header("Location: ../createNewsletter.php?error=no_file_selected");
             exit;
         }elseif($fileExtension != "png" && $fileExtension != 'jpg' && $fileExtension != 'jpeg'){
-            header("Location: ../createNewsletter.php?error=png_error");
+            header("Location: ../createNewsletter.php?error=file_type_error");
             exit();
         }else{
             if (!is_dir('uploads')) {
@@ -32,7 +33,7 @@ if ($db_obj->connect_error) {
             $new_width = 1000; 
             $new_height = 800;
             $thumbnail = imagecreatetruecolor($new_width, $new_height);
-            imageantialias($thumbnail, true); //erhöht die Qualität
+            imageantialias($thumbnail, true); //increase Quality of picture
             
             if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
                 $source_image = imagecreatefromjpeg($file['tmp_name']);
@@ -40,7 +41,7 @@ if ($db_obj->connect_error) {
                 $source_image = imagecreatefrompng($file['tmp_name']);
             }
     
-            // Bild resampeln (Verkleinern)
+            // downsize picture
             imagecopyresampled(
                 $thumbnail,
                 $source_image,
@@ -49,19 +50,19 @@ if ($db_obj->connect_error) {
                 $width, $height
             );
     
-            // Thumbnail speichern (an den endgültigen Pfad)
+            //save thumbnail as path
             $thumbnail_path = 'uploads/' . $fileName;
             if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
-                imagejpeg($thumbnail, $thumbnail_path, 95); // JPEG speichern mit 80% Qualität
+                imagejpeg($thumbnail, $thumbnail_path, 95);
             } elseif ($fileExtension === 'png') {
                 imagepng($thumbnail, $thumbnail_path);
             }
     
-            // Speicher freigeben
+            // release storage
             imagedestroy($thumbnail);
             imagedestroy($source_image);
     
-            // Bildpfad für die Datenbank
+            // path for database
             $picture = 'form/'.$thumbnail_path;
         }
     
@@ -103,10 +104,10 @@ if ($db_obj->connect_error) {
     
             unset($_SESSION['newsletter_form_data']);
             header("Location: ../newsletter.php?success=1");
-            exit(); // IMPORTANT: Terminate the current script
+            exit(); 
         
     } else {
-        // If the page is accessed directly, show only the form
+        // direct access restriction
         include '../createNewsletter.php';
     }
 }

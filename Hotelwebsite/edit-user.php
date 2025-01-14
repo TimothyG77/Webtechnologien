@@ -54,8 +54,6 @@ $profile_form_data = $_SESSION['profile_form_data'] ?? [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body>
 <?php include('header.php'); 
@@ -93,11 +91,13 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
     <!-- Profile Details -->
     <form action="form/edit-user-form.php?id=<?php echo htmlspecialchars($current_id); ?>" method="POST">
         
+    <!-- Username -->
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username"
                    value="<?php echo htmlspecialchars($profile_username); ?>" required>
         </div>
+        <!-- Mr, Mrs, Divers -->
         <div class="mb-3">
             <label for="salutation" class="form-label">Salutation</label>
             <select id="salutation" name="salutation" class="form-control">
@@ -106,34 +106,41 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
                 <option value="Divers" <?php if ($profile_salutation == 'Divers') echo 'selected'; ?>>Divers</option>
             </select>
         </div>
+        <!-- First name -->
         <div class="mb-3">
             <label for="name" class="form-label">First Name</label>
             <input type="text" class="form-control" id="name" name="name"
                    value="<?php echo htmlspecialchars($profile_firstname); ?>" required>
         </div>
+        <!-- Last name -->
         <div class="mb-3">
             <label for="surname" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="surname" name="surname"
                    value="<?php echo htmlspecialchars($profile_lastname); ?>" required>
         </div>
+        <!-- email -->
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email"
                    value="<?php echo htmlspecialchars($profile_email); ?>" required>
         </div>
-
+        <!-- role -->
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
             <input type="role" class="form-control" id="role" name="role"
                    value="<?php echo htmlspecialchars($role); ?>" required>
         </div>
-
+        <!-- status -->
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
-            <input type="status" class="form-control" id="status" name="status"
-                   value="<?php echo htmlspecialchars($status); ?>" required>
+            <select id="status" name="status" class="form-control">
+                <option value="active"<?php if ($status == 'active') echo 'selected'; ?> >active</option>
+                <option value="inactive" <?php if ($status == 'inactive') echo 'selected'; ?> >inactive</option>
+                
+            </select>
+            
         </div>
-        
+        <!-- new password (if necessary)-->
         <div class="mb-3">
             <label for="new_password" class="form-label">New Password (if necessary)</label>
             <input type="password" class="form-control" id="new_password" name="new_password">
@@ -143,6 +150,5 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
 </div>
 
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

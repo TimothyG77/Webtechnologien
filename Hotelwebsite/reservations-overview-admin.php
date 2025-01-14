@@ -8,16 +8,18 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 require_once('form/dbaccess.php');
-// Verbindung zur Datenbank herstellen
+
 $db_obj = new mysqli($host, $user, $dbpassword, $database);
 
 if ($db_obj->connect_error) {
-    die("Connection failed: " . $db_obj->connect_error);
+    echo "Connection Error: " . $db_obj->connect_error;
+    exit();
 }
 
-// Filter-Logik
+// filter-logic
 $status_filter = isset($_GET['status']) ? $_GET['status'] : 'all';
 
+//standard is all as a filter
 if ($status_filter === 'all') {
     $sql = "SELECT * FROM reservation ORDER BY status";
     $result = $db_obj->query($sql);
@@ -36,8 +38,6 @@ if ($status_filter === 'all') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations-Overview</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body>
 <?php include('header.php'); ?>
@@ -93,6 +93,5 @@ if ($status_filter === 'all') {
 </div>
 
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

@@ -4,11 +4,11 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 
-// Alle Session-Daten löschen
+// remove session data
 session_unset();
 session_destroy();
 
-// Zur Login-Seite weiterleiten
+
 header("Location: login.php");
 exit();
 ?>

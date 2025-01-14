@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_found = false;
 
         while ($row = $result->fetch_array()) { 
-
+            //if a username matches and the password matches aswell, it checks if a potential new username is still unique
             if (password_verify($current_password, $row['password']) && $row['username'] === $_SESSION['username']) {
                 $sql_users = "SELECT * FROM users";
                 $result_users = $db_obj -> query($sql_users);
@@ -103,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     
 } else {
-    // Direct access is not allowed
-    header("Location: profile.php");
+    // direct access
+    header("Location: index.php");
     exit();
 }
 ?>

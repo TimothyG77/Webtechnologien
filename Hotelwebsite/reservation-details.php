@@ -124,6 +124,5 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
 </div>
 
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

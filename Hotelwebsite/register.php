@@ -11,8 +11,6 @@ $form_data = $_SESSION['form_data'] ?? []; // Retrieve the stored form data if a
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body class="register-background">
 <?php include('header.php'); ?>
@@ -91,6 +89,5 @@ $form_data = $_SESSION['form_data'] ?? []; // Retrieve the stored form data if a
     </form>
 </div>
 <?php include('footer.php'); ?>
-<?php include('script.php'); ?>
 </body>
 </html>

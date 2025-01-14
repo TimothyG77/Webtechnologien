@@ -12,10 +12,10 @@ if (session_status() == PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GD Hotel - Startseite</title>
-    <?php include('link.php'); ?>
 </head>
 <body class="home-background">
     <?php include('header.php');
+    //success messages for registration, reservation, login
     if (isset($_GET['registration_success']) && $_GET['registration_success']) {
         echo "<div class='alert alert-success mt-3' role='alert'>Registration was successful.</div>";
         unset($_SESSION['registration_success']);
@@ -32,7 +32,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <div class="container">
         <div class="jumbotron text-center">
-            <h1 class="introduction-display">Welcome to GD Hotel <?php if(isset($_SESSION['username'])){echo ', '.$_SESSION['username'];} ?></h1>
+            <h1 class="introduction-display">Welcome to GD Hotel<?php if(isset($_SESSION['username'])){echo ', '.$_SESSION['username'];} ?></h1> <!-- displays current user -->
             <p class="introduction-lead-text">Your luxury stay in Vienna awaits you!</p>
         </div>
     </div>
@@ -82,7 +82,6 @@ if (session_status() == PHP_SESSION_NONE) {
         </div>
 
     <?php include('footer.php'); ?>
-    <?php include('script.php'); ?>
 
    
 </body>

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = trim($_POST['status']);
     $hashed_password;
     
-    // Store form data in session to retain values in case of an error
+    // Store form data in session to save input data if error accures
     $_SESSION['profile_form_data'] = [
         'username' => $username,
         'salutation' => $salutation,
@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Connection Error: " . $db_obj->connect_error;
         exit();
     }else{
+        //get a list with all users to check if username is unique
         $sql = "SELECT * FROM users WHERE id != '$current_id'";
         $result = $db_obj -> query($sql);
         
@@ -57,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
             }
         }else{
+            //if password should stay the same, it has to be safed from the db and filled in again
             $sql_find_current_pw = "SELECT * FROM users WHERE id = '$current_id'";
             $result = $db_obj -> query($sql_find_current_pw);
             while($row = $result->fetch_array()){
@@ -96,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
     }else{
-        // Direct access is not allowed
+        // direct access restriction
         header("Location: index.php");
         exit();
     }

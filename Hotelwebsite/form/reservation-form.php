@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'pets' => trim($_POST['pets'] ?? ''),
     ];
 
-    // Validation: Check-out date must be later than check-in date
+    // Check-out date must be later than check-in date
     if (strtotime( $_POST['check_out']) <= strtotime($_POST['check_in'])) {
         header("Location: ../reservation.php?error=checkin_checkout");
         exit();
@@ -24,17 +24,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db_obj = new mysqli($host, $user, $dbpassword, $database);
 
     
-    // check Room availability
+    // check Room availability:
     $checkInDate = $_POST['check_in'];
     $checkOutDate = $_POST['check_out'];
-    $sql_check_room_avail = "SELECT * FROM reservation WHERE NOT (CheckOutDate < ? OR ? < CheckInDate)";
+    //Selects every reservation, where the checkoutdate is not before the sected CheckIn date or the sected checkOunt date is not before the checkindate
+    $sql_check_room_avail = "SELECT * FROM reservation WHERE NOT (CheckOutDate < ? OR ? < CheckInDate) AND status != 'cancelled'"; 
     $stmt = $db_obj->prepare($sql_check_room_avail);
     $stmt->bind_param("ss", $checkInDate, $checkOutDate);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    //We assume, that our hotel has 500 rooms in total
-    if ($result->num_rows > 2) {
+    //We assume, that our hotel has 2 rooms in total
+    if ($result->num_rows > 1) {
         header("Location: ../reservation.php?error=availability");
         exit();
     }
@@ -62,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $creation_date = $creation_date->format('Y-m-d H:i:s');
     $status = 'new';
 
-    //calculating days
+    //calculating days (for price calc)
     $checkInDateObj = new DateTime($checkInDate);
     $checkOutDateObj = new DateTime($checkOutDate);
 

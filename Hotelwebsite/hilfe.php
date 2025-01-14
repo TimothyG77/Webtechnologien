@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help / FAQ</title>
-    <?php include('link.php'); ?>
 </head>
 <body class="help-background help-page">
 <?php include('header.php'); ?>
@@ -28,7 +27,7 @@
     </div>
 </main>
 
-<!-- Modale Fenster für Antworten -->
+
 <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -99,6 +98,6 @@
     
 
    <?php include('footer.php'); ?>
-   <?php include('script.php'); ?>
+  
 </body>
 </html>
