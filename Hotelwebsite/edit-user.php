@@ -135,8 +135,7 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
             <label for="status" class="form-label">Status</label>
             <select id="status" name="status" class="form-control">
                 <option value="active"<?php if ($status == 'active') echo 'selected'; ?> >active</option>
-                <option value="inactive" <?php if ($status == 'inactive') echo 'selected'; ?> >inactive</option>
-                
+                <option value="inactive" <?php if ($status == 'inactive') echo 'selected'; ?> >inactive</option>  
             </select>
             
         </div>

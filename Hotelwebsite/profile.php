@@ -94,11 +94,13 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
 
     
     <form action="profile_update.php" method="POST">
+        <!-- Username -->
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username"
                    value="<?php echo htmlspecialchars($profile_username); ?>" required>
         </div>
+        <!-- Salutation -->
         <div class="mb-3">
             <label for="salutation" class="form-label">Salutation</label>
             <select id="salutation" name="salutation" class="form-control">
@@ -107,25 +109,30 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
                 <option value="Divers" <?php if ($profile_salutation == 'Divers') echo 'selected'; ?>>Divers</option>
             </select>
         </div>
+        <!-- First Name -->
         <div class="mb-3">
             <label for="name" class="form-label">First Name</label>
             <input type="text" class="form-control" id="name" name="name"
                    value="<?php echo htmlspecialchars($profile_firstname); ?>" required>
         </div>
+        <!-- Last Name -->
         <div class="mb-3">
             <label for="surname" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="surname" name="surname"
                    value="<?php echo htmlspecialchars($profile_lastname); ?>" required>
         </div>
+        <!-- Email -->
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email"
                    value="<?php echo htmlspecialchars($profile_email); ?>" required>
         </div>
+        <!-- current password -->
         <div class="mb-3">
             <label for="current_password" class="form-label">Current Password</label>
             <input type="password" class="form-control" id="current_password" name="current_password" required>
         </div>
+        <!-- new password -->
         <div class="mb-3">
             <label for="new_password" class="form-label">New Password (optional)</label>
             <input type="password" class="form-control" id="new_password" name="new_password">

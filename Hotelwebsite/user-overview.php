@@ -54,6 +54,7 @@ $result = $db_obj->query($sql);
         <tbody>
         <?php
         if ($result->num_rows > 0) {
+            //gives an overview with all users and shows all attributes + an edit button and a button to see all reservations from the user
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
                 echo '<td>' . htmlspecialchars($row['id']) . '</td>';

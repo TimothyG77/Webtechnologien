@@ -44,8 +44,6 @@ $profile_form_data = $_SESSION['profile_form_data'] ?? [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation Details</title>
-    <!-- Bootstrap CSS -->
-    <?php include('link.php'); ?>
 </head>
 <body>
 <?php include('header.php'); 
@@ -61,17 +59,19 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
 
     <!-- Profile Details -->
     <form action="form/update-reservation.php?id=<?php echo htmlspecialchars($current_id); ?>" method="POST">
-        
+        <!-- Check-in-date -->
         <div class="mb-3">
             <label for="check-in-date" class="form-label">Check-In-Date</label>
             <input type="date" class="form-control" id="check-in-date" name="check-in-date"
                    value="<?php echo htmlspecialchars($check_in_date); ?>" required>
         </div>
+        <!-- Check-out-date -->
         <div class="mb-3">
             <label for="username" class="form-label">Check-Out-Date</label>
             <input type="date" class="form-control" id="check-out-date" name="check-out-date"
                    value="<?php echo htmlspecialchars($check_out_date); ?>" required>
         </div>
+        <!-- Breakfast -->
         <div class="mb-3">
             <label for="breakfast" class="form-label">Breakfast</label>
             <select id="breakfast" name="breakfast" class="form-control">
@@ -80,6 +80,7 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
                 
             </select>
         </div>
+        <!-- Parking -->
         <div class="mb-3">
             <label for="parking" class="form-label">Parking</label>
             <select id="parking" name="parking" class="form-control">
@@ -87,23 +88,25 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
                 <option value="no" <?php if ($parking == 'no') echo 'selected'; ?>>no</option>
             </select>
         </div>
+        <!-- Pets -->
         <div class="mb-3">
             <label for="pets" class="form-label">Pets</label>
             <input type="text" class="form-control" id="pets" name="pets"
                    value="<?php echo htmlspecialchars($pets); ?>">
         </div>
+        <!-- User ID -->
         <div class="mb-3">
             <label for="user_id" class="form-label">User_ID</label>
             <input type="user_id" class="form-control" id="user_id" name="user_id"
                    value="<?php echo htmlspecialchars($user_id); ?>" required>
         </div>
-
+        <!-- Creation Date -->
         <div class="mb-3">
             <label for="creation_date" class="form-label">Creation Date</label>
             <input type="creation_date" class="form-control" id="creation_date" name="creation_date"
                    value="<?php echo htmlspecialchars($creation_date); ?>" required>
         </div>
-
+        <!-- Status -->
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
             <select id="status" name="status" class="form-control">
@@ -113,7 +116,7 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
                 
             </select>
         </div>
-
+        <!-- Price -->
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>
             <input type="price" class="form-control" id="price" name="price"

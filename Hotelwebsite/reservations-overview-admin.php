@@ -24,6 +24,7 @@ if ($status_filter === 'all') {
     $sql = "SELECT * FROM reservation ORDER BY status";
     $result = $db_obj->query($sql);
 } else {
+    //if filter is selected, it only filters the reservations with this filter in this sql-statement
     $sql = "SELECT * FROM reservation WHERE status = ?";
     $stmt = $db_obj->prepare($sql);
     $stmt->bind_param("s", $status_filter);
@@ -74,6 +75,7 @@ if ($status_filter === 'all') {
         <tbody>
         <?php
         if ($result->num_rows > 0) {
+            //this gives an overview with id, creation date, status and a button, if admin wants to see all details
             while ($row = $result->fetch_array()) {
                 echo '<tr>';
                 echo '<td>' . htmlspecialchars($row['id']) . '</td>';
