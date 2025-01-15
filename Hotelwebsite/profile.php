@@ -93,7 +93,7 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
     ?>
 
     
-    <form action="profile_update.php" method="POST">
+    <form action="form/profile_update.php" method="POST">
         <!-- Username -->
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
