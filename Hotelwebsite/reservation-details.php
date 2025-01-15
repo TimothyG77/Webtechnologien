@@ -112,7 +112,7 @@ if ( isset($_GET['update']) && $_GET['update'] == 'success') {
             <select id="status" name="status" class="form-control">
                 <option value="new" <?php if ($status == 'new') echo 'selected'; ?>>new</option>
                 <option value="confirmed" <?php if ($status == 'confirmed') echo 'selected'; ?>>confirmed</option>
-                <option value="cancelled" <?php if ($status == 'cancelled') echo 'selected'; ?>>canceled</option>
+                <option value="cancelled" <?php if ($status == 'cancelled') echo 'selected'; ?>>cancelled</option>
                 
             </select>
         </div>

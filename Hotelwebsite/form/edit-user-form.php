@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (strlen($new_password) < 8 ||
                 !preg_match('/[0-9]/', $new_password) ||
                 !preg_match('/[\W]/', $new_password)) {
-                header("Location: edit-user.php?id=$current_id &error=invalid_password");
+                header("Location: ../edit-user.php?id=$current_id &error=invalid_password");
                 exit();
             }else{
                 $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);

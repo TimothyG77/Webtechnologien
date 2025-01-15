@@ -55,7 +55,7 @@ $profile_form_data = $_SESSION['profile_form_data'] ?? [];
 <body>
 <?php include('header.php'); 
 if ( isset($_GET['update']) && $_GET['update'] == 'success') {
-    echo "<div class='alert alert-success mt-3' role='alert'>Registration was successful.</div>";
+    echo "<div class='alert alert-success mt-3' role='alert'>Update was successful.</div>";
     unset($_SESSION['registration_success']);
 }
 ?>

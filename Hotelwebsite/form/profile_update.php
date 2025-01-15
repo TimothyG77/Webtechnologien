@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $username = trim($_POST['username']);
     $current_password = trim($_POST['current_password']);
     $new_password = trim($_POST['new_password']);
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'email' => $email,
     ];
 
-    require_once('form/dbaccess.php');
+    require_once('dbaccess.php');
 
     $db_obj = new mysqli($host, $user, $dbpassword, $database);
     
@@ -31,31 +31,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }else{
         $sql = "SELECT * FROM users";
         $result = $db_obj -> query($sql);
-        $user_found = false;
-
-        while ($row = $result->fetch_array()) { 
+        while ($row = $result->fetch_array()) {
             //if a username matches and the password matches aswell, it checks if a potential new username is still unique
             if (password_verify($current_password, $row['password']) && $row['username'] === $_SESSION['username']) {
                 $sql_users = "SELECT * FROM users";
                 $result_users = $db_obj -> query($sql_users);
 
-                while ($row_users = $result_users->fetch_array()) { 
+                if($username !== $_SESSION['username']){
+                    while ($row_users = $result_users->fetch_array()) { 
 
-                    if ($row_users['username'] ===$_SESSION['username']) {
-                
-                    header("Location: ../profile.php?error=user_exists");
-                    exit();
-            }
+                        if ($row_users['username'] === $username) {
+                    
+                        header("Location: ../profile.php?error=user_exists");
+                        exit();
+                        }
+    
+                    }
+                }
 
-        }
-
-                $user_found = true;
+                            
                 //check, if password is correct
                 if(!empty($new_password)){
                     if (strlen($new_password) < 8 ||
                         !preg_match('/[0-9]/', $new_password) ||
                         !preg_match('/[\W]/', $new_password)) {
-                        header("Location: profile.php?error=invalid_password");
+                        header("Location: ../profile.php?error=invalid_password");
                         exit();
                     }
                 }
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Validate email format
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    header("Location: profile.php?error=invalid_email");
+                    header("Location: ../profile.php?error=invalid_email");
                     exit();
                 }
 
@@ -88,21 +88,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->bind_param('sssssss', $salutation, $name, $surname, $email, $username, $u_password, $_SESSION["username"]);
                 $stmt->execute();
             
-                header("Location: profile.php?update=success");
+                header("Location: ../profile.php?update=success");
                 $_SESSION["username"] = $username;
                 
                 exit();
             }
-        }
-        echo $user_found;
-        if(!$user_found){
-            header("Location: profile.php?error=wrong_password");
-                exit();
+
         }
     }
-
-    
-} else {
+}
+else {
     // direct access
     header("Location: index.php");
     exit();
